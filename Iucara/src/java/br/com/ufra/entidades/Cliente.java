@@ -131,7 +131,7 @@ public class Cliente implements Serializable {
 
     @Override
     public String toString() {
-        return "br.com.ufra.docs.BD.Cliente[ id=" + id + " ]";
+        return "br.com.ufra.entidades.Cliente[ id=" + id + " ]";
     }
     
 }

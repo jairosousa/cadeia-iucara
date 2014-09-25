@@ -6,11 +6,11 @@
 
 package br.com.ufra.entidades;
 
-import br.com.ufra.entidades.Batedor;
-import br.com.ufra.entidades.Cliente;
 import java.io.Serializable;
 import java.util.Date;
+import java.util.List;
 import javax.persistence.Basic;
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -20,10 +20,12 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 import javax.xml.bind.annotation.XmlRootElement;
+import javax.xml.bind.annotation.XmlTransient;
 
 /**
  *
@@ -59,15 +61,14 @@ public class Venda implements Serializable {
     @Basic(optional = false)
     @Column(name = "total")
     private double total;
-    @JoinColumn(name = "produto", referencedColumnName = "id")
-    @ManyToOne(optional = false)
-    private Produto produto;
     @JoinColumn(name = "cliente", referencedColumnName = "id")
     @ManyToOne(optional = false)
     private Cliente cliente;
     @JoinColumn(name = "batedor", referencedColumnName = "id")
     @ManyToOne(optional = false)
     private Batedor batedor;
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "venda")
+    private List<ItensProduto> itensProdutoList;
 
     public Venda() {
     }
@@ -124,14 +125,6 @@ public class Venda implements Serializable {
         this.total = total;
     }
 
-    public Produto getProduto() {
-        return produto;
-    }
-
-    public void setProduto(Produto produto) {
-        this.produto = produto;
-    }
-
     public Cliente getCliente() {
         return cliente;
     }
@@ -146,6 +139,15 @@ public class Venda implements Serializable {
 
     public void setBatedor(Batedor batedor) {
         this.batedor = batedor;
+    }
+
+    @XmlTransient
+    public List<ItensProduto> getItensProdutoList() {
+        return itensProdutoList;
+    }
+
+    public void setItensProdutoList(List<ItensProduto> itensProdutoList) {
+        this.itensProdutoList = itensProdutoList;
     }
 
     @Override
@@ -170,7 +172,7 @@ public class Venda implements Serializable {
 
     @Override
     public String toString() {
-        return "br.com.ufra.docs.BD.Venda[ id=" + id + " ]";
+        return "br.com.ufra.entidades.Venda[ id=" + id + " ]";
     }
     
 }

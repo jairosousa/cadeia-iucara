@@ -7,33 +7,31 @@
 package br.com.ufra.entidades;
 
 import java.io.Serializable;
-import java.util.List;
 import javax.persistence.Basic;
-import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
-import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.xml.bind.annotation.XmlRootElement;
-import javax.xml.bind.annotation.XmlTransient;
 
 /**
  *
  * @author Jairo Sousa
  */
 @Entity
-@Table(name = "acai")
+@Table(name = "itens_produto")
 @XmlRootElement
 @NamedQueries({
-    @NamedQuery(name = "Acai.findAll", query = "SELECT a FROM Acai a"),
-    @NamedQuery(name = "Acai.findById", query = "SELECT a FROM Acai a WHERE a.id = :id"),
-    @NamedQuery(name = "Acai.findByOrigem", query = "SELECT a FROM Acai a WHERE a.origem = :origem")})
-public class Acai implements Serializable {
+    @NamedQuery(name = "ItensProduto.findAll", query = "SELECT i FROM ItensProduto i"),
+    @NamedQuery(name = "ItensProduto.findById", query = "SELECT i FROM ItensProduto i WHERE i.id = :id"),
+    @NamedQuery(name = "ItensProduto.findByQuantidade", query = "SELECT i FROM ItensProduto i WHERE i.quantidade = :quantidade")})
+public class ItensProduto implements Serializable {
     private static final long serialVersionUID = 1L;
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -41,23 +39,25 @@ public class Acai implements Serializable {
     @Column(name = "id")
     private Integer id;
     @Basic(optional = false)
-    @Column(name = "origem")
-    private String origem;
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "acai")
-    private List<Compra> compraList;
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "acai")
-    private List<Processar> processarList;
+    @Column(name = "quantidade")
+    private double quantidade;
+    @JoinColumn(name = "venda", referencedColumnName = "id")
+    @ManyToOne(optional = false)
+    private Venda venda;
+    @JoinColumn(name = "produto", referencedColumnName = "id")
+    @ManyToOne(optional = false)
+    private Produto produto;
 
-    public Acai() {
+    public ItensProduto() {
     }
 
-    public Acai(Integer id) {
+    public ItensProduto(Integer id) {
         this.id = id;
     }
 
-    public Acai(Integer id, String origem) {
+    public ItensProduto(Integer id, double quantidade) {
         this.id = id;
-        this.origem = origem;
+        this.quantidade = quantidade;
     }
 
     public Integer getId() {
@@ -68,30 +68,28 @@ public class Acai implements Serializable {
         this.id = id;
     }
 
-    public String getOrigem() {
-        return origem;
+    public double getQuantidade() {
+        return quantidade;
     }
 
-    public void setOrigem(String origem) {
-        this.origem = origem;
+    public void setQuantidade(double quantidade) {
+        this.quantidade = quantidade;
     }
 
-    @XmlTransient
-    public List<Compra> getCompraList() {
-        return compraList;
+    public Venda getVenda() {
+        return venda;
     }
 
-    public void setCompraList(List<Compra> compraList) {
-        this.compraList = compraList;
+    public void setVenda(Venda venda) {
+        this.venda = venda;
     }
 
-    @XmlTransient
-    public List<Processar> getProcessarList() {
-        return processarList;
+    public Produto getProduto() {
+        return produto;
     }
 
-    public void setProcessarList(List<Processar> processarList) {
-        this.processarList = processarList;
+    public void setProduto(Produto produto) {
+        this.produto = produto;
     }
 
     @Override
@@ -104,10 +102,10 @@ public class Acai implements Serializable {
     @Override
     public boolean equals(Object object) {
         // TODO: Warning - this method won't work in the case the id fields are not set
-        if (!(object instanceof Acai)) {
+        if (!(object instanceof ItensProduto)) {
             return false;
         }
-        Acai other = (Acai) object;
+        ItensProduto other = (ItensProduto) object;
         if ((this.id == null && other.id != null) || (this.id != null && !this.id.equals(other.id))) {
             return false;
         }
@@ -116,7 +114,7 @@ public class Acai implements Serializable {
 
     @Override
     public String toString() {
-        return "br.com.ufra.docs.BD.Acai[ id=" + id + " ]";
+        return "br.com.ufra.entidades.ItensProduto[ id=" + id + " ]";
     }
     
 }
