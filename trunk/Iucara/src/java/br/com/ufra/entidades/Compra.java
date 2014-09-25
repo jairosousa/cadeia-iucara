@@ -51,13 +51,13 @@ public class Compra implements Serializable {
     private double quantidade;
     @JoinColumn(name = "comerciante", referencedColumnName = "id")
     @ManyToOne(optional = false)
-    private Comerciante comerciante;
+    private Atravessador comerciante;
     @JoinColumn(name = "batedor", referencedColumnName = "id")
     @ManyToOne(optional = false)
     private Batedor batedor;
     @JoinColumn(name = "acai", referencedColumnName = "id")
     @ManyToOne(optional = false)
-    private Acai acai;
+    private CestoAcai acai;
 
     public Compra() {
     }
@@ -96,11 +96,11 @@ public class Compra implements Serializable {
         this.quantidade = quantidade;
     }
 
-    public Comerciante getComerciante() {
+    public Atravessador getComerciante() {
         return comerciante;
     }
 
-    public void setComerciante(Comerciante comerciante) {
+    public void setComerciante(Atravessador comerciante) {
         this.comerciante = comerciante;
     }
 
@@ -112,11 +112,11 @@ public class Compra implements Serializable {
         this.batedor = batedor;
     }
 
-    public Acai getAcai() {
+    public CestoAcai getAcai() {
         return acai;
     }
 
-    public void setAcai(Acai acai) {
+    public void setAcai(CestoAcai acai) {
         this.acai = acai;
     }
 
@@ -142,7 +142,7 @@ public class Compra implements Serializable {
 
     @Override
     public String toString() {
-        return "br.com.ufra.docs.BD.Compra[ id=" + id + " ]";
+        return "br.com.ufra.entidades.Compra[ id=" + id + " ]";
     }
     
 }

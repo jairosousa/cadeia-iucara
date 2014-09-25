@@ -34,7 +34,6 @@ import javax.xml.bind.annotation.XmlTransient;
 @NamedQueries({
     @NamedQuery(name = "Produto.findAll", query = "SELECT p FROM Produto p"),
     @NamedQuery(name = "Produto.findById", query = "SELECT p FROM Produto p WHERE p.id = :id"),
-    @NamedQuery(name = "Produto.findByPreco", query = "SELECT p FROM Produto p WHERE p.preco = :preco"),
     @NamedQuery(name = "Produto.findByQuantidade", query = "SELECT p FROM Produto p WHERE p.quantidade = :quantidade")})
 public class Produto implements Serializable {
     private static final long serialVersionUID = 1L;
@@ -44,16 +43,13 @@ public class Produto implements Serializable {
     @Column(name = "id")
     private Integer id;
     @Basic(optional = false)
-    @Column(name = "preco")
-    private String preco;
-    @Basic(optional = false)
     @Column(name = "quantidade")
-    private String quantidade;
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "produto")
-    private List<Venda> vendaList;
+    private int quantidade;
     @JoinColumn(name = "processar", referencedColumnName = "id")
     @ManyToOne(optional = false)
-    private Processar processar;
+    private Processamento processar;
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "produto")
+    private List<ItensProduto> itensProdutoList;
 
     public Produto() {
     }
@@ -62,9 +58,8 @@ public class Produto implements Serializable {
         this.id = id;
     }
 
-    public Produto(Integer id, String preco, String quantidade) {
+    public Produto(Integer id, int quantidade) {
         this.id = id;
-        this.preco = preco;
         this.quantidade = quantidade;
     }
 
@@ -76,37 +71,29 @@ public class Produto implements Serializable {
         this.id = id;
     }
 
-    public String getPreco() {
-        return preco;
-    }
-
-    public void setPreco(String preco) {
-        this.preco = preco;
-    }
-
-    public String getQuantidade() {
+    public int getQuantidade() {
         return quantidade;
     }
 
-    public void setQuantidade(String quantidade) {
+    public void setQuantidade(int quantidade) {
         this.quantidade = quantidade;
     }
 
-    @XmlTransient
-    public List<Venda> getVendaList() {
-        return vendaList;
-    }
-
-    public void setVendaList(List<Venda> vendaList) {
-        this.vendaList = vendaList;
-    }
-
-    public Processar getProcessar() {
+    public Processamento getProcessar() {
         return processar;
     }
 
-    public void setProcessar(Processar processar) {
+    public void setProcessar(Processamento processar) {
         this.processar = processar;
+    }
+
+    @XmlTransient
+    public List<ItensProduto> getItensProdutoList() {
+        return itensProdutoList;
+    }
+
+    public void setItensProdutoList(List<ItensProduto> itensProdutoList) {
+        this.itensProdutoList = itensProdutoList;
     }
 
     @Override
@@ -131,7 +118,7 @@ public class Produto implements Serializable {
 
     @Override
     public String toString() {
-        return "br.com.ufra.docs.BD.Produto[ id=" + id + " ]";
+        return "br.com.ufra.entidades.Produto[ id=" + id + " ]";
     }
     
 }

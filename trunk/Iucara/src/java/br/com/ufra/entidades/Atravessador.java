@@ -27,16 +27,16 @@ import javax.xml.bind.annotation.XmlTransient;
  * @author Jairo Sousa
  */
 @Entity
-@Table(name = "comerciante")
+@Table(name = "atravessador")
 @XmlRootElement
 @NamedQueries({
-    @NamedQuery(name = "Comerciante.findAll", query = "SELECT c FROM Comerciante c"),
-    @NamedQuery(name = "Comerciante.findById", query = "SELECT c FROM Comerciante c WHERE c.id = :id"),
-    @NamedQuery(name = "Comerciante.findByNome", query = "SELECT c FROM Comerciante c WHERE c.nome = :nome"),
-    @NamedQuery(name = "Comerciante.findByEndereco", query = "SELECT c FROM Comerciante c WHERE c.endereco = :endereco"),
-    @NamedQuery(name = "Comerciante.findByTelefone", query = "SELECT c FROM Comerciante c WHERE c.telefone = :telefone"),
-    @NamedQuery(name = "Comerciante.findByEmail", query = "SELECT c FROM Comerciante c WHERE c.email = :email")})
-public class Comerciante implements Serializable {
+    @NamedQuery(name = "Atravessador.findAll", query = "SELECT a FROM Atravessador a"),
+    @NamedQuery(name = "Atravessador.findById", query = "SELECT a FROM Atravessador a WHERE a.id = :id"),
+    @NamedQuery(name = "Atravessador.findByNome", query = "SELECT a FROM Atravessador a WHERE a.nome = :nome"),
+    @NamedQuery(name = "Atravessador.findByEndereco", query = "SELECT a FROM Atravessador a WHERE a.endereco = :endereco"),
+    @NamedQuery(name = "Atravessador.findByTelefone", query = "SELECT a FROM Atravessador a WHERE a.telefone = :telefone"),
+    @NamedQuery(name = "Atravessador.findByEmail", query = "SELECT a FROM Atravessador a WHERE a.email = :email")})
+public class Atravessador implements Serializable {
     private static final long serialVersionUID = 1L;
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -58,14 +58,14 @@ public class Comerciante implements Serializable {
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "comerciante")
     private List<Compra> compraList;
 
-    public Comerciante() {
+    public Atravessador() {
     }
 
-    public Comerciante(Integer id) {
+    public Atravessador(Integer id) {
         this.id = id;
     }
 
-    public Comerciante(Integer id, String nome, String endereco, String telefone, String email) {
+    public Atravessador(Integer id, String nome, String endereco, String telefone, String email) {
         this.id = id;
         this.nome = nome;
         this.endereco = endereco;
@@ -132,10 +132,10 @@ public class Comerciante implements Serializable {
     @Override
     public boolean equals(Object object) {
         // TODO: Warning - this method won't work in the case the id fields are not set
-        if (!(object instanceof Comerciante)) {
+        if (!(object instanceof Atravessador)) {
             return false;
         }
-        Comerciante other = (Comerciante) object;
+        Atravessador other = (Atravessador) object;
         if ((this.id == null && other.id != null) || (this.id != null && !this.id.equals(other.id))) {
             return false;
         }
@@ -144,7 +144,7 @@ public class Comerciante implements Serializable {
 
     @Override
     public String toString() {
-        return "br.com.ufra.docs.BD.Comerciante[ id=" + id + " ]";
+        return "br.com.ufra.entidades.Atravessador[ id=" + id + " ]";
     }
     
 }

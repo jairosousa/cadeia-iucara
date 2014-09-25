@@ -10,11 +10,11 @@ CREATE SCHEMA IF NOT EXISTS `iucara` DEFAULT CHARACTER SET utf8 COLLATE utf8_gen
 USE `iucara` ;
 
 -- -----------------------------------------------------
--- Table `iucara`.`comerciante`
+-- Table `iucara`.`atravessador`
 -- -----------------------------------------------------
-DROP TABLE IF EXISTS `iucara`.`comerciante` ;
+DROP TABLE IF EXISTS `iucara`.`atravessador` ;
 
-CREATE TABLE IF NOT EXISTS `iucara`.`comerciante` (
+CREATE TABLE IF NOT EXISTS `iucara`.`atravessador` (
   `id` INT NOT NULL AUTO_INCREMENT,
   `nome` VARCHAR(100) NOT NULL,
   `endereco` VARCHAR(100) NOT NULL,
@@ -40,13 +40,14 @@ ENGINE = InnoDB;
 
 
 -- -----------------------------------------------------
--- Table `iucara`.`acai`
+-- Table `iucara`.`cesto_acai`
 -- -----------------------------------------------------
-DROP TABLE IF EXISTS `iucara`.`acai` ;
+DROP TABLE IF EXISTS `iucara`.`cesto_acai` ;
 
-CREATE TABLE IF NOT EXISTS `iucara`.`acai` (
+CREATE TABLE IF NOT EXISTS `iucara`.`cesto_acai` (
   `id` INT NOT NULL AUTO_INCREMENT,
   `origem` VARCHAR(100) NOT NULL,
+  `quantidade` INT NULL,
   PRIMARY KEY (`id`))
 ENGINE = InnoDB;
 
@@ -69,7 +70,7 @@ CREATE TABLE IF NOT EXISTS `iucara`.`compra` (
   INDEX `fk_compra_acai1_idx` (`acai` ASC),
   CONSTRAINT `fk_compra_comerciante`
     FOREIGN KEY (`comerciante`)
-    REFERENCES `iucara`.`comerciante` (`id`)
+    REFERENCES `iucara`.`atravessador` (`id`)
     ON DELETE NO ACTION
     ON UPDATE NO ACTION,
   CONSTRAINT `fk_compra_batedor1`
@@ -79,7 +80,7 @@ CREATE TABLE IF NOT EXISTS `iucara`.`compra` (
     ON UPDATE NO ACTION,
   CONSTRAINT `fk_compra_acai1`
     FOREIGN KEY (`acai`)
-    REFERENCES `iucara`.`acai` (`id`)
+    REFERENCES `iucara`.`cesto_acai` (`id`)
     ON DELETE NO ACTION
     ON UPDATE NO ACTION)
 ENGINE = InnoDB;
@@ -98,11 +99,11 @@ ENGINE = InnoDB;
 
 
 -- -----------------------------------------------------
--- Table `iucara`.`processar`
+-- Table `iucara`.`processamento`
 -- -----------------------------------------------------
-DROP TABLE IF EXISTS `iucara`.`processar` ;
+DROP TABLE IF EXISTS `iucara`.`processamento` ;
 
-CREATE TABLE IF NOT EXISTS `iucara`.`processar` (
+CREATE TABLE IF NOT EXISTS `iucara`.`processamento` (
   `id` INT NOT NULL,
   `data` DATE NOT NULL,
   `quantidade` DOUBLE NOT NULL,
@@ -125,7 +126,7 @@ CREATE TABLE IF NOT EXISTS `iucara`.`processar` (
     ON UPDATE NO ACTION,
   CONSTRAINT `fk_processar_acai1`
     FOREIGN KEY (`acai`)
-    REFERENCES `iucara`.`acai` (`id`)
+    REFERENCES `iucara`.`cesto_acai` (`id`)
     ON DELETE NO ACTION
     ON UPDATE NO ACTION)
 ENGINE = InnoDB;
@@ -138,14 +139,13 @@ DROP TABLE IF EXISTS `iucara`.`produto` ;
 
 CREATE TABLE IF NOT EXISTS `iucara`.`produto` (
   `id` INT NOT NULL AUTO_INCREMENT,
-  `preco` VARCHAR(45) NOT NULL,
-  `quantidade` VARCHAR(45) NOT NULL,
+  `quantidade` INT NOT NULL,
   `processar` INT NOT NULL,
   PRIMARY KEY (`id`),
   INDEX `fk_produto_processar1_idx` (`processar` ASC),
   CONSTRAINT `fk_produto_processar1`
     FOREIGN KEY (`processar`)
-    REFERENCES `iucara`.`processar` (`id`)
+    REFERENCES `iucara`.`processamento` (`id`)
     ON DELETE NO ACTION
     ON UPDATE NO ACTION)
 ENGINE = InnoDB;
@@ -176,18 +176,11 @@ CREATE TABLE IF NOT EXISTS `iucara`.`venda` (
   `quantidade` DOUBLE NOT NULL,
   `preco` DOUBLE NOT NULL,
   `total` DOUBLE NOT NULL,
-  `produto` INT NOT NULL,
   `cliente` INT NOT NULL,
   `batedor` INT NOT NULL,
   PRIMARY KEY (`id`),
-  INDEX `fk_venda_produto1_idx` (`produto` ASC),
   INDEX `fk_venda_cliente1_idx` (`cliente` ASC),
   INDEX `fk_venda_batedor1_idx` (`batedor` ASC),
-  CONSTRAINT `fk_venda_produto1`
-    FOREIGN KEY (`produto`)
-    REFERENCES `iucara`.`produto` (`id`)
-    ON DELETE NO ACTION
-    ON UPDATE NO ACTION,
   CONSTRAINT `fk_venda_cliente1`
     FOREIGN KEY (`cliente`)
     REFERENCES `iucara`.`cliente` (`id`)
@@ -196,6 +189,32 @@ CREATE TABLE IF NOT EXISTS `iucara`.`venda` (
   CONSTRAINT `fk_venda_batedor1`
     FOREIGN KEY (`batedor`)
     REFERENCES `iucara`.`batedor` (`id`)
+    ON DELETE NO ACTION
+    ON UPDATE NO ACTION)
+ENGINE = InnoDB;
+
+
+-- -----------------------------------------------------
+-- Table `iucara`.`itens_produto`
+-- -----------------------------------------------------
+DROP TABLE IF EXISTS `iucara`.`itens_produto` ;
+
+CREATE TABLE IF NOT EXISTS `iucara`.`itens_produto` (
+  `id` INT NOT NULL AUTO_INCREMENT,
+  `quantidade` DOUBLE NOT NULL,
+  `venda` INT NOT NULL,
+  `produto` INT NOT NULL,
+  PRIMARY KEY (`id`),
+  INDEX `fk_itens_produto_venda1_idx` (`venda` ASC),
+  INDEX `fk_itens_produto_produto1_idx` (`produto` ASC),
+  CONSTRAINT `fk_itens_produto_venda1`
+    FOREIGN KEY (`venda`)
+    REFERENCES `iucara`.`venda` (`id`)
+    ON DELETE NO ACTION
+    ON UPDATE NO ACTION,
+  CONSTRAINT `fk_itens_produto_produto1`
+    FOREIGN KEY (`produto`)
+    REFERENCES `iucara`.`produto` (`id`)
     ON DELETE NO ACTION
     ON UPDATE NO ACTION)
 ENGINE = InnoDB;

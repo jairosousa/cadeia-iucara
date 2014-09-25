@@ -6,9 +6,6 @@
 
 package br.com.ufra.entidades;
 
-import br.com.ufra.entidades.Acai;
-import br.com.ufra.entidades.Categoria;
-import br.com.ufra.entidades.Batedor;
 import java.io.Serializable;
 import java.util.Date;
 import java.util.List;
@@ -33,14 +30,14 @@ import javax.xml.bind.annotation.XmlTransient;
  * @author Jairo Sousa
  */
 @Entity
-@Table(name = "processar")
+@Table(name = "processamento")
 @XmlRootElement
 @NamedQueries({
-    @NamedQuery(name = "Processar.findAll", query = "SELECT p FROM Processar p"),
-    @NamedQuery(name = "Processar.findById", query = "SELECT p FROM Processar p WHERE p.id = :id"),
-    @NamedQuery(name = "Processar.findByData", query = "SELECT p FROM Processar p WHERE p.data = :data"),
-    @NamedQuery(name = "Processar.findByQuantidade", query = "SELECT p FROM Processar p WHERE p.quantidade = :quantidade")})
-public class Processar implements Serializable {
+    @NamedQuery(name = "Processamento.findAll", query = "SELECT p FROM Processamento p"),
+    @NamedQuery(name = "Processamento.findById", query = "SELECT p FROM Processamento p WHERE p.id = :id"),
+    @NamedQuery(name = "Processamento.findByData", query = "SELECT p FROM Processamento p WHERE p.data = :data"),
+    @NamedQuery(name = "Processamento.findByQuantidade", query = "SELECT p FROM Processamento p WHERE p.quantidade = :quantidade")})
+public class Processamento implements Serializable {
     private static final long serialVersionUID = 1L;
     @Id
     @Basic(optional = false)
@@ -63,16 +60,16 @@ public class Processar implements Serializable {
     private Categoria categoria;
     @JoinColumn(name = "acai", referencedColumnName = "id")
     @ManyToOne(optional = false)
-    private Acai acai;
+    private CestoAcai acai;
 
-    public Processar() {
+    public Processamento() {
     }
 
-    public Processar(Integer id) {
+    public Processamento(Integer id) {
         this.id = id;
     }
 
-    public Processar(Integer id, Date data, double quantidade) {
+    public Processamento(Integer id, Date data, double quantidade) {
         this.id = id;
         this.data = data;
         this.quantidade = quantidade;
@@ -127,11 +124,11 @@ public class Processar implements Serializable {
         this.categoria = categoria;
     }
 
-    public Acai getAcai() {
+    public CestoAcai getAcai() {
         return acai;
     }
 
-    public void setAcai(Acai acai) {
+    public void setAcai(CestoAcai acai) {
         this.acai = acai;
     }
 
@@ -145,10 +142,10 @@ public class Processar implements Serializable {
     @Override
     public boolean equals(Object object) {
         // TODO: Warning - this method won't work in the case the id fields are not set
-        if (!(object instanceof Processar)) {
+        if (!(object instanceof Processamento)) {
             return false;
         }
-        Processar other = (Processar) object;
+        Processamento other = (Processamento) object;
         if ((this.id == null && other.id != null) || (this.id != null && !this.id.equals(other.id))) {
             return false;
         }
@@ -157,7 +154,7 @@ public class Processar implements Serializable {
 
     @Override
     public String toString() {
-        return "br.com.ufra.docs.BD.Processar[ id=" + id + " ]";
+        return "br.com.ufra.entidades.Processamento[ id=" + id + " ]";
     }
     
 }

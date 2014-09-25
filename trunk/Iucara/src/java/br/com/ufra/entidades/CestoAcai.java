@@ -12,6 +12,8 @@ import javax.persistence.Basic;
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
@@ -25,34 +27,40 @@ import javax.xml.bind.annotation.XmlTransient;
  * @author Jairo Sousa
  */
 @Entity
-@Table(name = "categoria")
+@Table(name = "cesto_acai")
 @XmlRootElement
 @NamedQueries({
-    @NamedQuery(name = "Categoria.findAll", query = "SELECT c FROM Categoria c"),
-    @NamedQuery(name = "Categoria.findById", query = "SELECT c FROM Categoria c WHERE c.id = :id"),
-    @NamedQuery(name = "Categoria.findByNome", query = "SELECT c FROM Categoria c WHERE c.nome = :nome")})
-public class Categoria implements Serializable {
+    @NamedQuery(name = "CestoAcai.findAll", query = "SELECT c FROM CestoAcai c"),
+    @NamedQuery(name = "CestoAcai.findById", query = "SELECT c FROM CestoAcai c WHERE c.id = :id"),
+    @NamedQuery(name = "CestoAcai.findByOrigem", query = "SELECT c FROM CestoAcai c WHERE c.origem = :origem"),
+    @NamedQuery(name = "CestoAcai.findByQuantidade", query = "SELECT c FROM CestoAcai c WHERE c.quantidade = :quantidade")})
+public class CestoAcai implements Serializable {
     private static final long serialVersionUID = 1L;
     @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Basic(optional = false)
     @Column(name = "id")
     private Integer id;
     @Basic(optional = false)
-    @Column(name = "nome")
-    private String nome;
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "categoria")
+    @Column(name = "origem")
+    private String origem;
+    @Column(name = "quantidade")
+    private Integer quantidade;
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "acai")
+    private List<Compra> compraList;
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "acai")
     private List<Processamento> processamentoList;
 
-    public Categoria() {
+    public CestoAcai() {
     }
 
-    public Categoria(Integer id) {
+    public CestoAcai(Integer id) {
         this.id = id;
     }
 
-    public Categoria(Integer id, String nome) {
+    public CestoAcai(Integer id, String origem) {
         this.id = id;
-        this.nome = nome;
+        this.origem = origem;
     }
 
     public Integer getId() {
@@ -63,12 +71,29 @@ public class Categoria implements Serializable {
         this.id = id;
     }
 
-    public String getNome() {
-        return nome;
+    public String getOrigem() {
+        return origem;
     }
 
-    public void setNome(String nome) {
-        this.nome = nome;
+    public void setOrigem(String origem) {
+        this.origem = origem;
+    }
+
+    public Integer getQuantidade() {
+        return quantidade;
+    }
+
+    public void setQuantidade(Integer quantidade) {
+        this.quantidade = quantidade;
+    }
+
+    @XmlTransient
+    public List<Compra> getCompraList() {
+        return compraList;
+    }
+
+    public void setCompraList(List<Compra> compraList) {
+        this.compraList = compraList;
     }
 
     @XmlTransient
@@ -90,10 +115,10 @@ public class Categoria implements Serializable {
     @Override
     public boolean equals(Object object) {
         // TODO: Warning - this method won't work in the case the id fields are not set
-        if (!(object instanceof Categoria)) {
+        if (!(object instanceof CestoAcai)) {
             return false;
         }
-        Categoria other = (Categoria) object;
+        CestoAcai other = (CestoAcai) object;
         if ((this.id == null && other.id != null) || (this.id != null && !this.id.equals(other.id))) {
             return false;
         }
@@ -102,7 +127,7 @@ public class Categoria implements Serializable {
 
     @Override
     public String toString() {
-        return "br.com.ufra.entidades.Categoria[ id=" + id + " ]";
+        return "br.com.ufra.entidades.CestoAcai[ id=" + id + " ]";
     }
     
 }

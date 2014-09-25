@@ -60,7 +60,7 @@ public class Batedor implements Serializable {
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "batedor")
     private List<Venda> vendaList;
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "batedor")
-    private List<Processar> processarList;
+    private List<Processamento> processamentoList;
 
     public Batedor() {
     }
@@ -136,12 +136,12 @@ public class Batedor implements Serializable {
     }
 
     @XmlTransient
-    public List<Processar> getProcessarList() {
-        return processarList;
+    public List<Processamento> getProcessamentoList() {
+        return processamentoList;
     }
 
-    public void setProcessarList(List<Processar> processarList) {
-        this.processarList = processarList;
+    public void setProcessamentoList(List<Processamento> processamentoList) {
+        this.processamentoList = processamentoList;
     }
 
     @Override
@@ -166,7 +166,7 @@ public class Batedor implements Serializable {
 
     @Override
     public String toString() {
-        return "br.com.ufra.docs.BD.Batedor[ id=" + id + " ]";
+        return "br.com.ufra.entidades.Batedor[ id=" + id + " ]";
     }
     
 }
