@@ -41,12 +41,12 @@ public class ItensProduto implements Serializable {
     @Basic(optional = false)
     @Column(name = "quantidade")
     private double quantidade;
-    @JoinColumn(name = "venda", referencedColumnName = "id")
-    @ManyToOne(optional = false)
-    private Venda venda;
     @JoinColumn(name = "produto", referencedColumnName = "id")
     @ManyToOne(optional = false)
     private Produto produto;
+    @JoinColumn(name = "venda", referencedColumnName = "id")
+    @ManyToOne(optional = false)
+    private Venda venda;
 
     public ItensProduto() {
     }
@@ -76,20 +76,20 @@ public class ItensProduto implements Serializable {
         this.quantidade = quantidade;
     }
 
-    public Venda getVenda() {
-        return venda;
-    }
-
-    public void setVenda(Venda venda) {
-        this.venda = venda;
-    }
-
     public Produto getProduto() {
         return produto;
     }
 
     public void setProduto(Produto produto) {
         this.produto = produto;
+    }
+
+    public Venda getVenda() {
+        return venda;
+    }
+
+    public void setVenda(Venda venda) {
+        this.venda = venda;
     }
 
     @Override

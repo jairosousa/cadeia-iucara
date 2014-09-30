@@ -1,0 +1,76 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+To change this license header, choose License Headers in Project Properties.
+To change this template file, choose Tools | Templates
+and open the template in the editor.
+-->
+<!DOCTYPE html>
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+                xmlns:ui="http://java.sun.com/jsf/facelets"
+                xmlns:h="http://java.sun.com/jsf/html"
+                xmlns:p="http://primefaces.org/ui" template="../../index.xhtml"
+                xmlns:c="http://java.sun.com/jsp/jstl/core"
+                xmlns:f="http://xmlns.jcp.org/jsf/core">
+
+
+    <ui:define name="content">
+
+        <h:form id="listagemCompra">
+            <p:growl id="grow"
+                     showDetail="true"
+                     sticky="false"/>
+
+            <p:fieldset legend="Compras">
+                <p:dataTable
+                    value="#{compraBean.compras}"
+                    var="compras">
+
+                    <p:column headerText="Data">
+                        <h:outputText value="#{compras.data}">
+                            <f:convertDateTime pattern="dd/MM/yyyy"/>
+                        </h:outputText>
+                    </p:column>
+
+                    <p:column headerText="Quantidade">
+                        <h:outputText value="#{compras.quantidade}"/>
+                    </p:column>
+
+                    <p:column headerText="Atravessador">
+                        <h:outputText value="#{compras.atravessador.nome}"/>
+                    </p:column>
+
+                    <p:column headerText="Batedor">
+                        <h:outputText value="#{compras.batedor.nome}"/>
+                    </p:column>
+
+                    <p:column headerText="Cesto Açai">
+                        <h:outputText value="#{compras.cestoAcai.quantidade}"/>
+                    </p:column>
+
+                    <p:column headerText="Operações">
+                        <div align="center">
+                            <p:commandButton
+                                ajax="false"
+                                icon="ui-icon-pencil"
+                                action="#{compraBean.editar()}">
+                                <f:setPropertyActionListener
+                                    target="#{compraBean.compra}"
+                                    value="#{compras}"/>
+                            </p:commandButton>
+
+                            <p:commandButton
+                                ajax="false"
+                                icon="ui-icon-trash"
+                                action="#{compraBean.excluir()}">
+                                <f:setPropertyActionListener
+                                    target="#{compraBean.compra}"
+                                    value="#{compras}"/>
+                            </p:commandButton>
+                        </div>
+                    </p:column>
+                </p:dataTable>
+
+            </p:fieldset>
+        </h:form>
+    </ui:define>
+</ui:composition>

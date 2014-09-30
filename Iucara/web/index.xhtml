@@ -1,12 +1,41 @@
-<?xml version='1.0' encoding='UTF-8' ?>
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+To change this license header, choose License Headers in Project Properties.
+To change this template file, choose Tools | Templates
+and open the template in the editor.
+-->
+<!DOCTYPE html>
 <html xmlns="http://www.w3.org/1999/xhtml"
-      xmlns:h="http://xmlns.jcp.org/jsf/html">
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:c="http://java.sun.com/jsp/jstl/core"
+      xmlns:p="http://primefaces.org/ui">
     <h:head>
-        <title>Facelet Title</title>
+        <meta http-equiv="Content-Type" content="text/html; charset-utf-8" />
+        <meta http-equiv="Pragma" content="no-cache"/>
+        <meta http-equiv="Cache-Control" content="no-cache" />
+        <meta http-equiv="Expire" content="0"/>
+        <link rel="shortcut-icon" type="image/x-icon" href="#{request.contextPath}/resources/images/browser.ico"/>
+        <link rel="stylesheet" type="text/css" href="#{request.contextPath}/resources/css/main.css"/>
+        <title>Projeto Iuçara</title>
+
     </h:head>
-    <h:body>
-        Hello from Facelets
+    <h:body >
+        <p:layout fullPage="true">
+            <p:layoutUnit position="north" size="110" resizable="false" closable="false" collapsible="false">
+                <ui:include src="/templates/header.xhtml" />            
+            </p:layoutUnit>
+            <p:layoutUnit position="south" size="50" resizable="false" closable="false" collapsible="false">
+                <ui:include src="/templates/footer.xhtml" />            
+            </p:layoutUnit>
+            <p:layoutUnit position="west" size="200" header="Menu" 
+                          resizable="false" closable="false" collapsible="false">
+                <ui:include src="/templates/menu.xhtml" />            
+            </p:layoutUnit>
+            <p:layoutUnit position="center">
+                <ui:insert name="content" />            
+            </p:layoutUnit>
+        </p:layout>
     </h:body>
 </html>
-

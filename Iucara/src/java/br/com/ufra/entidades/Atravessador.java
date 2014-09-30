@@ -55,7 +55,7 @@ public class Atravessador implements Serializable {
     @Basic(optional = false)
     @Column(name = "email")
     private String email;
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "comerciante")
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "atravessador")
     private List<Compra> compraList;
 
     public Atravessador() {

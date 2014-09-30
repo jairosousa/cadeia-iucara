@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+To change this license header, choose License Headers in Project Properties.
+To change this template file, choose Tools | Templates
+and open the template in the editor.
+-->
+<!DOCTYPE html>
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+                xmlns:ui="http://java.sun.com/jsf/facelets"
+                xmlns:h="http://java.sun.com/jsf/html"
+                xmlns:p="http://primefaces.org/ui" template="../../index.xhtml"
+                xmlns:c="http://java.sun.com/jsp/jstl/core"
+                xmlns:f="http://xmlns.jcp.org/jsf/core">
+
+
+    <ui:define name="content">
+        <!--Desenvolver listagem dos cestos de açai-->
+        <h:form id="listagemCat">
+
+            <p:growl id="grow"
+                     showDetail="true"
+                     sticky="false"/>
+            <p:fieldset legend="Cesto Açai">
+                <p:dataTable
+                    value="#{cestoAcaiBean.cestosAcai}"
+                    var="cestoAcai">
+                    <p:column headerText="Origem">
+                        <h:outputText value="#{cestoAcai.origem}"/>
+                    </p:column>
+                    <p:column headerText="Quantidade">
+                        <h:outputText value="#{cestoAcai.quantidade}"/>
+                    </p:column>
+
+                    <p:column headerText="Operações">
+                        <div align="center">
+                            <p:commandButton
+                                ajax="false"
+                                icon="ui-icon-pencil"
+                                action="#{cestoAcaiBean.editar()}">
+                                <f:setPropertyActionListener
+                                    target="#{cestoAcaiBean.cestoAcai}"
+                                    value="#{cestoAcai}"/>
+                            </p:commandButton>
+                            <p:commandButton
+                                ajax="false"
+                                icon="ui-icon-trash"
+                                action="#{cestoAcaiBean.excluir()}">
+
+                                <f:setPropertyActionListener
+                                    target="#{cestoAcaiBean.excluir}"
+                                    value="#{cestoAcai}"/>
+                            </p:commandButton>
+                        </div>
+                    </p:column>
+                </p:dataTable>
+            </p:fieldset>
+        </h:form>
+    </ui:define>
+</ui:composition>

@@ -7,8 +7,11 @@
 package br.com.ufra.entidades;
 
 import java.io.Serializable;
+import java.util.Calendar;
 import java.util.Date;
+import java.util.List;
 import javax.persistence.Basic;
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -18,10 +21,12 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 import javax.xml.bind.annotation.XmlRootElement;
+import javax.xml.bind.annotation.XmlTransient;
 
 /**
  *
@@ -49,15 +54,17 @@ public class Compra implements Serializable {
     @Basic(optional = false)
     @Column(name = "quantidade")
     private double quantidade;
-    @JoinColumn(name = "comerciante", referencedColumnName = "id")
+    @JoinColumn(name = "cestoAcai", referencedColumnName = "id")
     @ManyToOne(optional = false)
-    private Atravessador comerciante;
+    private CestoAcai cestoAcai;
     @JoinColumn(name = "batedor", referencedColumnName = "id")
     @ManyToOne(optional = false)
     private Batedor batedor;
-    @JoinColumn(name = "acai", referencedColumnName = "id")
+    @JoinColumn(name = "atravessador", referencedColumnName = "id")
     @ManyToOne(optional = false)
-    private CestoAcai acai;
+    private Atravessador atravessador;
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "compra")
+    private List<Processamento> processamentoList;
 
     public Compra() {
     }
@@ -96,12 +103,12 @@ public class Compra implements Serializable {
         this.quantidade = quantidade;
     }
 
-    public Atravessador getComerciante() {
-        return comerciante;
+    public CestoAcai getCestoAcai() {
+        return cestoAcai;
     }
 
-    public void setComerciante(Atravessador comerciante) {
-        this.comerciante = comerciante;
+    public void setCestoAcai(CestoAcai cestoAcai) {
+        this.cestoAcai = cestoAcai;
     }
 
     public Batedor getBatedor() {
@@ -112,12 +119,21 @@ public class Compra implements Serializable {
         this.batedor = batedor;
     }
 
-    public CestoAcai getAcai() {
-        return acai;
+    public Atravessador getAtravessador() {
+        return atravessador;
     }
 
-    public void setAcai(CestoAcai acai) {
-        this.acai = acai;
+    public void setAtravessador(Atravessador atravessador) {
+        this.atravessador = atravessador;
+    }
+
+    @XmlTransient
+    public List<Processamento> getProcessamentoList() {
+        return processamentoList;
+    }
+
+    public void setProcessamentoList(List<Processamento> processamentoList) {
+        this.processamentoList = processamentoList;
     }
 
     @Override

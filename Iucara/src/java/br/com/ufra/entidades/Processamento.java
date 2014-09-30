@@ -3,16 +3,18 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-
 package br.com.ufra.entidades;
 
 import java.io.Serializable;
+import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
 import javax.persistence.Basic;
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
@@ -38,8 +40,10 @@ import javax.xml.bind.annotation.XmlTransient;
     @NamedQuery(name = "Processamento.findByData", query = "SELECT p FROM Processamento p WHERE p.data = :data"),
     @NamedQuery(name = "Processamento.findByQuantidade", query = "SELECT p FROM Processamento p WHERE p.quantidade = :quantidade")})
 public class Processamento implements Serializable {
+
     private static final long serialVersionUID = 1L;
     @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Basic(optional = false)
     @Column(name = "id")
     private Integer id;
@@ -52,15 +56,15 @@ public class Processamento implements Serializable {
     private double quantidade;
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "processar")
     private List<Produto> produtoList;
+    @JoinColumn(name = "compra", referencedColumnName = "id")
+    @ManyToOne(optional = false)
+    private Compra compra;
     @JoinColumn(name = "batedor", referencedColumnName = "id")
     @ManyToOne(optional = false)
     private Batedor batedor;
     @JoinColumn(name = "categoria", referencedColumnName = "id")
     @ManyToOne(optional = false)
     private Categoria categoria;
-    @JoinColumn(name = "acai", referencedColumnName = "id")
-    @ManyToOne(optional = false)
-    private CestoAcai acai;
 
     public Processamento() {
     }
@@ -108,6 +112,14 @@ public class Processamento implements Serializable {
         this.produtoList = produtoList;
     }
 
+    public Compra getCompra() {
+        return compra;
+    }
+
+    public void setCompra(Compra compra) {
+        this.compra = compra;
+    }
+
     public Batedor getBatedor() {
         return batedor;
     }
@@ -122,14 +134,6 @@ public class Processamento implements Serializable {
 
     public void setCategoria(Categoria categoria) {
         this.categoria = categoria;
-    }
-
-    public CestoAcai getAcai() {
-        return acai;
-    }
-
-    public void setAcai(CestoAcai acai) {
-        this.acai = acai;
     }
 
     @Override
@@ -156,5 +160,5 @@ public class Processamento implements Serializable {
     public String toString() {
         return "br.com.ufra.entidades.Processamento[ id=" + id + " ]";
     }
-    
+
 }

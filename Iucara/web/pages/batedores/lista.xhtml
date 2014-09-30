@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+To change this license header, choose License Headers in Project Properties.
+To change this template file, choose Tools | Templates
+and open the template in the editor.
+-->
+<!DOCTYPE html>
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+                xmlns:ui="http://java.sun.com/jsf/facelets"
+                xmlns:h="http://java.sun.com/jsf/html"
+                xmlns:p="http://primefaces.org/ui" template="../../index.xhtml"
+                xmlns:f="http://xmlns.jcp.org/jsf/core">
+
+
+    <ui:define name="content">
+        <h:form id="listagemBate">
+
+            <p:growl id="grow"
+                     showDetail="true"
+                     sticky="false"/>
+            <p:fieldset legend="Batedores">
+                <p:dataTable
+                    value="#{batedorBean.batedores}"
+                    var="batedor">
+                    <p:column headerText="Nome">
+                        <h:outputText value="#{batedor.nome}"/>
+                    </p:column>
+                    <p:column headerText="Endereço">
+                        <h:outputText value="#{batedor.endereco}"/>
+                    </p:column>
+                    <p:column headerText="Email">
+                        <h:outputText value="#{batedor.email}"/>
+                    </p:column>
+                    <p:column headerText="Telefone">
+                        <h:outputText value="#{batedor.telefone}"/>
+                    </p:column>
+
+                    <p:column headerText="Operações">
+                        <div align="center">
+                        <p:commandButton
+                            ajax="false"
+                            icon="ui-icon-pencil"
+                            action="#{batedorBean.editar()}">
+                            <f:setPropertyActionListener
+                                target="#{batedorBean.batedor}"
+                                value="#{batedor}"/>
+                        </p:commandButton>
+                        <p:commandButton
+                            ajax="false"
+                            icon="ui-icon-trash"
+                            action="#{batedorBean.excluir()}">
+                            <f:setPropertyActionListener
+                                target="#{batedorBean.batedor}"
+                                value="#{batedor}"/>
+                        </p:commandButton>
+                        </div>
+                    </p:column>
+                </p:dataTable>
+            </p:fieldset>
+        </h:form>
+    </ui:define>
+</ui:composition>
