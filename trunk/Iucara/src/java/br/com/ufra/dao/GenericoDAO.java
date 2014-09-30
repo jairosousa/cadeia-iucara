@@ -54,7 +54,6 @@ public class GenericoDAO<T> implements InterfaceDao<T> {
             this.iniciarTransacao();
             em.persist(o);
             this.confirmarTransacao();
-            em.close();
             return true;
         } catch (EntityExistsException e) {
             if (em.isOpen()) {
@@ -66,9 +65,7 @@ public class GenericoDAO<T> implements InterfaceDao<T> {
                 this.desfazerTransacao();
             }
             return false;
-        }finally{
-            FabricaConexao.closeEntityManagerFactory();
-        } 
+        }
     }
 
     @Override

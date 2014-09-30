@@ -1,0 +1,20 @@
+.ui-uidget {
+    font-size: 50% !important;
+}
+.ui-panelmenu .ui-panelmenu-header a{
+    color: black;
+}
+
+#indexHeader{
+    font-family: verdana, sans-serif;
+    color: black;
+    font-size: 15px;
+    font-weight: bolder;
+}
+#indexFooter{
+    font-family: verdana, sans-serif;
+    color: gray;
+    font-size: 10px;
+    font-weight: bolder;
+}
+

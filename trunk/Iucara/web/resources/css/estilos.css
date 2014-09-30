@@ -1,0 +1,65 @@
+/*
+To change this license header, choose License Headers in Project Properties.
+To change this template file, choose Tools | Templates
+and open the template in the editor.
+*/
+/* 
+    Created on : 09/08/2014, 10:11:13
+    Author     : Jairo Sousa
+*/
+
+.titulo{
+    font-size: 1.4em;
+    font-style: italic;
+    font-family: Palatino;
+    text-align: center;
+}
+.mensagem{
+    font-size: 1.4em;
+    font-style: italic;
+    font-family: Palatino;
+    text-align: center;
+}
+
+.tituloRodape{
+    font-size: 0.85em;
+    font-style: normal;
+    font-family: Palatino;
+    text-align: center;
+}
+#cabecalho{
+    padding: 20px;
+    height: 30px;
+    margin-bottom: 10px;
+    background: #dddddd;
+    border: 1px solid darkgray;
+}
+
+#barraEsquerda{
+    border: thin solid lightgray;
+    padding: 5px;
+    width: 150px;
+    background: #eeeeee;
+}
+
+#conteudo{
+    padding: 5px;
+    border: thin solid lightgray;
+    background: #fefeet;
+    position: absolute;
+    right: 8px;
+    left: 180px;
+    height: 400px;
+    top: 90px;
+}
+#rodape{
+    padding: 20px;
+    height: 30px;
+    margin-bottom: 10px;
+    background: #dddddd;
+    border: 1px solid darkgray;
+    margin-bottom: 10px;
+    text-align: center;
+    bottom:0px;
+    left:10px;
+}

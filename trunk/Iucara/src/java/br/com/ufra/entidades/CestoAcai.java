@@ -44,12 +44,11 @@ public class CestoAcai implements Serializable {
     @Basic(optional = false)
     @Column(name = "origem")
     private String origem;
+    // @Max(value=?)  @Min(value=?)//if you know range of your decimal fields consider using these annotations to enforce field validation
     @Column(name = "quantidade")
-    private Integer quantidade;
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "acai")
+    private Double quantidade;
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "cestoAcai")
     private List<Compra> compraList;
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "acai")
-    private List<Processamento> processamentoList;
 
     public CestoAcai() {
     }
@@ -79,11 +78,11 @@ public class CestoAcai implements Serializable {
         this.origem = origem;
     }
 
-    public Integer getQuantidade() {
+    public Double getQuantidade() {
         return quantidade;
     }
 
-    public void setQuantidade(Integer quantidade) {
+    public void setQuantidade(Double quantidade) {
         this.quantidade = quantidade;
     }
 
@@ -94,15 +93,6 @@ public class CestoAcai implements Serializable {
 
     public void setCompraList(List<Compra> compraList) {
         this.compraList = compraList;
-    }
-
-    @XmlTransient
-    public List<Processamento> getProcessamentoList() {
-        return processamentoList;
-    }
-
-    public void setProcessamentoList(List<Processamento> processamentoList) {
-        this.processamentoList = processamentoList;
     }
 
     @Override

@@ -61,12 +61,12 @@ public class Venda implements Serializable {
     @Basic(optional = false)
     @Column(name = "total")
     private double total;
-    @JoinColumn(name = "cliente", referencedColumnName = "id")
-    @ManyToOne(optional = false)
-    private Cliente cliente;
     @JoinColumn(name = "batedor", referencedColumnName = "id")
     @ManyToOne(optional = false)
     private Batedor batedor;
+    @JoinColumn(name = "cliente", referencedColumnName = "id")
+    @ManyToOne(optional = false)
+    private Cliente cliente;
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "venda")
     private List<ItensProduto> itensProdutoList;
 
@@ -125,20 +125,20 @@ public class Venda implements Serializable {
         this.total = total;
     }
 
-    public Cliente getCliente() {
-        return cliente;
-    }
-
-    public void setCliente(Cliente cliente) {
-        this.cliente = cliente;
-    }
-
     public Batedor getBatedor() {
         return batedor;
     }
 
     public void setBatedor(Batedor batedor) {
         this.batedor = batedor;
+    }
+
+    public Cliente getCliente() {
+        return cliente;
+    }
+
+    public void setCliente(Cliente cliente) {
+        this.cliente = cliente;
     }
 
     @XmlTransient

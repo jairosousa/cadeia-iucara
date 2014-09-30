@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+To change this license header, choose License Headers in Project Properties.
+To change this template file, choose Tools | Templates
+and open the template in the editor.
+-->
+<!DOCTYPE html>
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+                xmlns:ui="http://java.sun.com/jsf/facelets"
+                xmlns:h="http://java.sun.com/jsf/html"
+                xmlns:p="http://primefaces.org/ui" template="../../index.xhtml"
+                xmlns:c="http://java.sun.com/jsp/jstl/core"
+                xmlns:f="http://xmlns.jcp.org/jsf/core">
+
+
+    <ui:define name="content">
+            <h:form id="listagemCat">
+
+                <p:growl id="grow"
+                         showDetail="true"
+                         sticky="false"/>
+                <p:fieldset legend="Categoria">
+                    <p:dataTable
+                        value="#{categoriaBean.categorias}"
+                        var="categoria">
+                        <p:column headerText="Nome">
+                            <h:outputText value="#{categoria.nome}"/>
+                        </p:column>
+
+                        <p:column headerText="Operações">
+                            <div align="center">
+                                <p:commandButton
+                                    ajax="false"
+                                    icon="ui-icon-pencil"
+                                    action="#{categoriaBean.editar()}">
+                                    <f:setPropertyActionListener
+                                        target="#{categoriaBean.categoria}"
+                                        value="#{categoria}"/>
+                                </p:commandButton>
+                                <p:commandButton
+                                    ajax="false"
+                                    icon="ui-icon-trash"
+                                    action="#{categoriaBean.excluir()}">
+                                    
+                                    <f:setPropertyActionListener
+                                        target="#{categoriaBean.categoria}"
+                                        value="#{categoria}"/>
+                                </p:commandButton>
+                            </div>
+                        </p:column>
+                    </p:dataTable>
+                </p:fieldset>
+            </h:form>
+    </ui:define>
+</ui:composition>
