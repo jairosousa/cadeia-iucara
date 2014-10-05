@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+To change this license header, choose License Headers in Project Properties.
+To change this template file, choose Tools | Templates
+and open the template in the editor.
+-->
+<!DOCTYPE html>
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+                xmlns:ui="http://java.sun.com/jsf/facelets" 
+                xmlns:h="http://java.sun.com/jsf/html" 
+                xmlns:p="http://primefaces.org/ui" template="../../index.xhtml" 
+                xmlns:c="http://java.sun.com/jsp/jstl/core"
+                xmlns:f="http://xmlns.jcp.org/jsf/core">
+
+
+    <ui:define name="content">
+        <h:form id="listaDistribuidor">
+
+            <p:growl id="grow"
+                     showDetail="true"
+                     sticky="false"/>
+            
+            <p:fieldset legend="Distribuidores">
+                <p:dataTable
+                    value="#{disbribuidorBean.distribuidores}"
+                    var="distribuidor">
+                    <p:column headerText="Nome">
+                        <h:outputText value="#{distribuidor.nome}"/>
+                    </p:column>
+                    <p:column headerText="Endereço">
+                        <h:outputText value="#{distribuidor.endereco}"/>
+                    </p:column>
+                    <p:column headerText="Bairro">
+                        <h:outputText value="#{distribuidor.bairro.nome}"/>
+                    </p:column>
+                    <p:column headerText="Email">
+                        <h:outputText value="#{distribuidor.email}"/>
+                    </p:column>
+                    <p:column headerText="Telefone">
+                        <h:outputText value="#{distribuidor.telefone}"/>
+                    </p:column>
+                    <p:column headerText="Loggin">
+                        <h:outputText value="#{distribuidor.loggin}"/>
+                    </p:column>
+
+                    <p:column headerText="Operações">
+                        <div align="center">
+                            <p:commandButton
+                                ajax="false"
+                                icon="ui-icon-pencil"
+                                action="#{disbribuidorBean.salvar()}">
+                                <f:setPropertyActionListener
+                                    target="#{disbribuidorBean.distribuidor}"
+                                    value="#{distribuidor}"/>
+                            </p:commandButton>
+                            <p:commandButton
+                                ajax="false"
+                                icon="ui-icon-trash"
+                                action="#{disbribuidorBean.excluir()}">
+                                <f:setPropertyActionListener
+                                    target="#{disbribuidorBean.distribuidor}"
+                                    value="#{distribuidor}"/>
+                            </p:commandButton>
+                        </div>
+                    </p:column>
+                </p:dataTable>
+            </p:fieldset>
+        </h:form>
+    </ui:define>
+</ui:composition>
