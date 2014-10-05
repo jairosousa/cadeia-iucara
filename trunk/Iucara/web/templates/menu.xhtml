@@ -8,55 +8,75 @@ and open the template in the editor.
 <html xmlns="http://www.w3.org/1999/xhtml"
       xmlns:ui="http://java.sun.com/jsf/facelets"
       xmlns:h="http://java.sun.com/jsf/html"
-      xmlns:p="http://primefaces.org/ui">
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
 
     <body>
         <ui:composition>
             <div id="mainMenu">
                 <h:form>
                     <p:panelMenu>
-                        <p:submenu label="Atravessador">
-                            <p:menuitem value="Listar" url="/pages/atravessador/lista.xhtml"
+                        
+                        <p:submenu label="Bairro">
+                            <p:menuitem value="Listar" url="/pages/bairro/lista.xhtml"
                                         icon="ui-icon-note"/>
-                            <p:menuitem value="Cadastro" url="/pages/atravessador/formulario.xhtml"
-                                        icon="ui-icon-note"/>
-                        </p:submenu>
-                        <p:submenu label="Batedor">
-                            <p:menuitem value="Listar" url="/pages/batedores/lista.xhtml"
-                                        icon="ui-icon-note"/>
-                            <p:menuitem value="Cadastro" url="/pages/batedores/formulario.xhtml"
+                            <p:menuitem value="Cadastro" url="/pages/bairro/formulario.xhtml"
                                         icon="ui-icon-note"/>
                         </p:submenu>
-                        <p:submenu label="Categoria">
-                            <p:menuitem value="Listar" url="/pages/categoria/lista.xhtml"
-                                        icon="ui-icon-note"/>
-                            <p:menuitem value="Cadastro" url="/pages/categoria/formulario.xhtml"
-                                        icon="ui-icon-note"/>
-                        </p:submenu>
+                        
                         <p:submenu label="Cesto Açai">
                             <p:menuitem value="Listar" url="/pages/cestoAcai/lista.xhtml"
                                         icon="ui-icon-note"/>
                             <p:menuitem value="Cadastro" url="/pages/cestoAcai/formulario.xhtml"
                                         icon="ui-icon-note"/>
                         </p:submenu>
-                        <p:submenu label="Comprar">
-                            <p:menuitem value="Listar" url="/pages/compras/lista.xhtml"
+                        
+                        <p:submenu label="Distribuidor">
+                            <p:menuitem value="Listar" url="/pages/distribuidor/lista.xhtml"
                                         icon="ui-icon-note"/>
-                            <p:menuitem value="Cadastro" url="/pages/compras/formulario.xhtml"
+                            <p:menuitem value="Cadastro" url="/pages/distribuidor/formulario.xhtml"
                                         icon="ui-icon-note"/>
                         </p:submenu>
+                        
+                        <p:submenu label="Batedor">
+                            <p:menuitem value="Listar" url="/pages/batedores/lista.xhtml"
+                                        icon="ui-icon-note"/>
+                            <p:menuitem value="Cadastro" url="/pages/batedores/formulario.xhtml"
+                                        icon="ui-icon-note"/>
+                        </p:submenu>
+                        
+                        <p:submenu label="Compras">
+                            <p:menuitem value="Listar" url="/pages/compras/lista.xhtml"
+                                        icon="ui-icon-note"/>
+                            <p:menuitem value="Realizar compra" url="/pages/compras/formulario.xhtml"
+                                        icon="ui-icon-note"/>
+                        </p:submenu>
+                        
+                        <p:submenu label="Categoria">
+                            <p:menuitem value="Listar" url="/pages/categoria/lista.xhtml"
+                                        icon="ui-icon-note"/>
+                            <p:menuitem value="Cadastro" url="/pages/categoria/formulario.xhtml"
+                                        icon="ui-icon-note"/>
+                        </p:submenu>
+                        
+                        
+                        
+                        
+                        
                         <p:submenu label="Processar">
                             <p:menuitem value="Listar" url="/pages/processamento/lista.xhtml"
                                         icon="ui-icon-note"/>
                             <p:menuitem value="Cadastro" url="/pages/processamento/formulario.xhtml"
                                         icon="ui-icon-note"/>
                         </p:submenu>
+                        
                         <p:submenu label="Produto">
                             <p:menuitem value="Listar" url="/pages/produto/lista.xhtml"
                                         icon="ui-icon-note"/>
                             <p:menuitem value="Cadastro" url="/pages/produto/formulario.xhtml"
                                         icon="ui-icon-note"/>
                         </p:submenu>
+                        
                     </p:panelMenu>  
                 </h:form>
             </div>

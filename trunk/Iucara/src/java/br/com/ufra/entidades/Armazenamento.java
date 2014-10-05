@@ -16,6 +16,7 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
+import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
 import javax.persistence.NamedQueries;
@@ -31,14 +32,14 @@ import javax.xml.bind.annotation.XmlTransient;
  * @author Jairo Sousa
  */
 @Entity
-@Table(name = "compra")
+@Table(name = "armazenamento")
 @XmlRootElement
 @NamedQueries({
-    @NamedQuery(name = "Compra.findAll", query = "SELECT c FROM Compra c"),
-    @NamedQuery(name = "Compra.findById", query = "SELECT c FROM Compra c WHERE c.id = :id"),
-    @NamedQuery(name = "Compra.findByData", query = "SELECT c FROM Compra c WHERE c.data = :data"),
-    @NamedQuery(name = "Compra.findByQuantidade", query = "SELECT c FROM Compra c WHERE c.quantidade = :quantidade")})
-public class Compra implements Serializable {
+    @NamedQuery(name = "Armazenamento.findAll", query = "SELECT a FROM Armazenamento a"),
+    @NamedQuery(name = "Armazenamento.findById", query = "SELECT a FROM Armazenamento a WHERE a.id = :id"),
+    @NamedQuery(name = "Armazenamento.findByData", query = "SELECT a FROM Armazenamento a WHERE a.data = :data"),
+    @NamedQuery(name = "Armazenamento.findByQuantidade", query = "SELECT a FROM Armazenamento a WHERE a.quantidade = :quantidade")})
+public class Armazenamento implements Serializable {
     private static final long serialVersionUID = 1L;
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -52,23 +53,26 @@ public class Compra implements Serializable {
     @Basic(optional = false)
     @Column(name = "quantidade")
     private double quantidade;
-    @ManyToMany(mappedBy = "compraList")
-    private List<CestoDistribuidor> cestoDistribuidorList;
-    @JoinColumn(name = "batedor", referencedColumnName = "id")
+    @JoinTable(name = "itens_armazenamento", joinColumns = {
+        @JoinColumn(name = "armazenamento", referencedColumnName = "id")}, inverseJoinColumns = {
+        @JoinColumn(name = "cesto_acai", referencedColumnName = "id")})
+    @ManyToMany
+    private List<CestoAcai> cestoAcaiList;
+    @JoinColumn(name = "Cesto_distribuidor", referencedColumnName = "id")
     @ManyToOne(optional = false)
-    private Batedor batedor;
+    private CestoDistribuidor cestodistribuidor;
     @JoinColumn(name = "distribuidor", referencedColumnName = "id")
     @ManyToOne(optional = false)
     private Distribuidor distribuidor;
 
-    public Compra() {
+    public Armazenamento() {
     }
 
-    public Compra(Integer id) {
+    public Armazenamento(Integer id) {
         this.id = id;
     }
 
-    public Compra(Integer id, Date data, double quantidade) {
+    public Armazenamento(Integer id, Date data, double quantidade) {
         this.id = id;
         this.data = data;
         this.quantidade = quantidade;
@@ -99,20 +103,20 @@ public class Compra implements Serializable {
     }
 
     @XmlTransient
-    public List<CestoDistribuidor> getCestoDistribuidorList() {
-        return cestoDistribuidorList;
+    public List<CestoAcai> getCestoAcaiList() {
+        return cestoAcaiList;
     }
 
-    public void setCestoDistribuidorList(List<CestoDistribuidor> cestoDistribuidorList) {
-        this.cestoDistribuidorList = cestoDistribuidorList;
+    public void setCestoAcaiList(List<CestoAcai> cestoAcaiList) {
+        this.cestoAcaiList = cestoAcaiList;
     }
 
-    public Batedor getBatedor() {
-        return batedor;
+    public CestoDistribuidor getCestodistribuidor() {
+        return cestodistribuidor;
     }
 
-    public void setBatedor(Batedor batedor) {
-        this.batedor = batedor;
+    public void setCestodistribuidor(CestoDistribuidor cestodistribuidor) {
+        this.cestodistribuidor = cestodistribuidor;
     }
 
     public Distribuidor getDistribuidor() {
@@ -133,10 +137,10 @@ public class Compra implements Serializable {
     @Override
     public boolean equals(Object object) {
         // TODO: Warning - this method won't work in the case the id fields are not set
-        if (!(object instanceof Compra)) {
+        if (!(object instanceof Armazenamento)) {
             return false;
         }
-        Compra other = (Compra) object;
+        Armazenamento other = (Armazenamento) object;
         if ((this.id == null && other.id != null) || (this.id != null && !this.id.equals(other.id))) {
             return false;
         }
@@ -145,7 +149,7 @@ public class Compra implements Serializable {
 
     @Override
     public String toString() {
-        return "br.com.ufra.entidades.Compra[ id=" + id + " ]";
+        return "br.com.ufra.entidades.Armazenamento[ id=" + id + " ]";
     }
     
 }

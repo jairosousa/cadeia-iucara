@@ -87,7 +87,7 @@ public class GenericoDAO<T> implements InterfaceDao<T> {
     public boolean excluir(T o) {
         try {
             this.iniciarTransacao();
-            em.remove(em.merge(o));
+            em.remove(o);
             this.confirmarTransacao();
             return true;
         } catch (Exception e) {

@@ -5,9 +5,6 @@
  */
 package br.com.ufra.dao;
 
-import br.com.ufra.entidades.Atravessador;
-import br.com.ufra.rn.AtravessadorRN;
-
 /**
  *
  * @author Jairo Sousa
@@ -17,10 +14,8 @@ public class testaInserirComerciante {
     public static void main(String[] args) {
 
 
-        AtravessadorRN rnA = new AtravessadorRN();
-        Atravessador a = rnA.obter(7);
         
-        System.out.println("Nome: " +a.getNome());
+        
         
 //        rnA.excluir(a);
 //

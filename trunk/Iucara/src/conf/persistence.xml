@@ -2,19 +2,21 @@
 <persistence version="2.1" xmlns="http://xmlns.jcp.org/xml/ns/persistence" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/persistence http://xmlns.jcp.org/xml/ns/persistence/persistence_2_1.xsd">
   <persistence-unit name="IucaraPU" transaction-type="RESOURCE_LOCAL">
     <provider>org.hibernate.ejb.HibernatePersistence</provider>
-    <class>br.com.ufra.entidades.Atravessador</class>
+    <class>br.com.ufra.entidades.Armazenamento</class>
+    <class>br.com.ufra.entidades.Bairro</class>
     <class>br.com.ufra.entidades.Batedor</class>
     <class>br.com.ufra.entidades.Categoria</class>
     <class>br.com.ufra.entidades.CestoAcai</class>
+    <class>br.com.ufra.entidades.CestoDistribuidor</class>
     <class>br.com.ufra.entidades.Cliente</class>
     <class>br.com.ufra.entidades.Compra</class>
-    <class>br.com.ufra.entidades.ItensProduto</class>
+    <class>br.com.ufra.entidades.Distribuidor</class>
     <class>br.com.ufra.entidades.Processamento</class>
-    <class>br.com.ufra.entidades.Produto</class>
     <class>br.com.ufra.entidades.Venda</class>
+    <class>br.com.ufra.entidades.VinhoEmbalado</class>
     <exclude-unlisted-classes>false</exclude-unlisted-classes>
     <properties>
-      <property name="javax.persistence.jdbc.url" value="jdbc:mysql://localhost:3306/cadeia_iucara?zeroDateTimeBehavior=convertToNull"/>
+      <property name="javax.persistence.jdbc.url" value="jdbc:mysql://localhost:3306/cadeia_iucara"/>
       <property name="javax.persistence.jdbc.user" value="root"/>
       <property name="javax.persistence.jdbc.driver" value="com.mysql.jdbc.Driver"/>
       <property name="javax.persistence.jdbc.password" value="jnssls"/>

@@ -7,18 +7,20 @@
 package br.com.ufra.entidades;
 
 import java.io.Serializable;
+import java.util.Date;
 import java.util.List;
 import javax.persistence.Basic;
-import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.ManyToMany;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
-import javax.persistence.OneToMany;
 import javax.persistence.Table;
+import javax.persistence.Temporal;
+import javax.persistence.TemporalType;
 import javax.xml.bind.annotation.XmlRootElement;
 import javax.xml.bind.annotation.XmlTransient;
 
@@ -32,8 +34,10 @@ import javax.xml.bind.annotation.XmlTransient;
 @NamedQueries({
     @NamedQuery(name = "CestoAcai.findAll", query = "SELECT c FROM CestoAcai c"),
     @NamedQuery(name = "CestoAcai.findById", query = "SELECT c FROM CestoAcai c WHERE c.id = :id"),
+    @NamedQuery(name = "CestoAcai.findByData", query = "SELECT c FROM CestoAcai c WHERE c.data = :data"),
     @NamedQuery(name = "CestoAcai.findByOrigem", query = "SELECT c FROM CestoAcai c WHERE c.origem = :origem"),
-    @NamedQuery(name = "CestoAcai.findByQuantidade", query = "SELECT c FROM CestoAcai c WHERE c.quantidade = :quantidade")})
+    @NamedQuery(name = "CestoAcai.findByQuantidade", query = "SELECT c FROM CestoAcai c WHERE c.quantidade = :quantidade"),
+    @NamedQuery(name = "CestoAcai.findByTipo", query = "SELECT c FROM CestoAcai c WHERE c.tipo = :tipo")})
 public class CestoAcai implements Serializable {
     private static final long serialVersionUID = 1L;
     @Id
@@ -42,13 +46,20 @@ public class CestoAcai implements Serializable {
     @Column(name = "id")
     private Integer id;
     @Basic(optional = false)
+    @Column(name = "data")
+    @Temporal(TemporalType.DATE)
+    private Date data;
+    @Basic(optional = false)
     @Column(name = "origem")
     private String origem;
-    // @Max(value=?)  @Min(value=?)//if you know range of your decimal fields consider using these annotations to enforce field validation
+    @Basic(optional = false)
     @Column(name = "quantidade")
-    private Double quantidade;
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "cestoAcai")
-    private List<Compra> compraList;
+    private double quantidade;
+    @Basic(optional = false)
+    @Column(name = "tipo")
+    private String tipo;
+    @ManyToMany(mappedBy = "cestoAcaiList")
+    private List<Armazenamento> armazenamentoList;
 
     public CestoAcai() {
     }
@@ -57,9 +68,12 @@ public class CestoAcai implements Serializable {
         this.id = id;
     }
 
-    public CestoAcai(Integer id, String origem) {
+    public CestoAcai(Integer id, Date data, String origem, double quantidade, String tipo) {
         this.id = id;
+        this.data = data;
         this.origem = origem;
+        this.quantidade = quantidade;
+        this.tipo = tipo;
     }
 
     public Integer getId() {
@@ -70,6 +84,14 @@ public class CestoAcai implements Serializable {
         this.id = id;
     }
 
+    public Date getData() {
+        return data;
+    }
+
+    public void setData(Date data) {
+        this.data = data;
+    }
+
     public String getOrigem() {
         return origem;
     }
@@ -78,21 +100,29 @@ public class CestoAcai implements Serializable {
         this.origem = origem;
     }
 
-    public Double getQuantidade() {
+    public double getQuantidade() {
         return quantidade;
     }
 
-    public void setQuantidade(Double quantidade) {
+    public void setQuantidade(double quantidade) {
         this.quantidade = quantidade;
     }
 
-    @XmlTransient
-    public List<Compra> getCompraList() {
-        return compraList;
+    public String getTipo() {
+        return tipo;
     }
 
-    public void setCompraList(List<Compra> compraList) {
-        this.compraList = compraList;
+    public void setTipo(String tipo) {
+        this.tipo = tipo;
+    }
+
+    @XmlTransient
+    public List<Armazenamento> getArmazenamentoList() {
+        return armazenamentoList;
+    }
+
+    public void setArmazenamentoList(List<Armazenamento> armazenamentoList) {
+        this.armazenamentoList = armazenamentoList;
     }
 
     @Override

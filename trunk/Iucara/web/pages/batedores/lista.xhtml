@@ -13,7 +13,7 @@ and open the template in the editor.
 
 
     <ui:define name="content">
-        <h:form id="listagemBate">
+        <h:form id="listaBatedor">
 
             <p:growl id="grow"
                      showDetail="true"
@@ -28,11 +28,17 @@ and open the template in the editor.
                     <p:column headerText="Endereço">
                         <h:outputText value="#{batedor.endereco}"/>
                     </p:column>
+                    <p:column headerText="Bairro">
+                        <h:outputText value="#{batedor.bairro.nome}"/>
+                    </p:column>
                     <p:column headerText="Email">
                         <h:outputText value="#{batedor.email}"/>
                     </p:column>
                     <p:column headerText="Telefone">
                         <h:outputText value="#{batedor.telefone}"/>
+                    </p:column>
+                    <p:column headerText="Loggin">
+                        <h:outputText value="#{batedor.loggin}"/>
                     </p:column>
 
                     <p:column headerText="Operações">
