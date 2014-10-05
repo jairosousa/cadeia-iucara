@@ -15,6 +15,8 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
 import javax.persistence.OneToMany;
@@ -51,6 +53,9 @@ public class Cliente implements Serializable {
     @Basic(optional = false)
     @Column(name = "contato")
     private String contato;
+    @JoinColumn(name = "bairro", referencedColumnName = "id")
+    @ManyToOne(optional = false)
+    private Bairro bairro;
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "cliente")
     private List<Venda> vendaList;
 
@@ -98,6 +103,14 @@ public class Cliente implements Serializable {
 
     public void setContato(String contato) {
         this.contato = contato;
+    }
+
+    public Bairro getBairro() {
+        return bairro;
+    }
+
+    public void setBairro(Bairro bairro) {
+        this.bairro = bairro;
     }
 
     @XmlTransient

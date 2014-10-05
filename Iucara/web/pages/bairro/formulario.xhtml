@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+To change this license header, choose License Headers in Project Properties.
+To change this template file, choose Tools | Templates
+and open the template in the editor.
+-->
+<!DOCTYPE html>
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+                xmlns:ui="http://java.sun.com/jsf/facelets"
+                xmlns:h="http://java.sun.com/jsf/html"
+                xmlns:p="http://primefaces.org/ui" template="../../index.xhtml"
+                xmlns:c="http://java.sun.com/jsp/jstl/core">
+
+
+    <ui:define name="content">
+        <!--Formulario Bairro-->
+        <h:form id="formularioBairro">
+            <p:growl
+                id="growl"
+                showDetail="true"
+                sticky="false"/>
+            <div align="center">
+                <p:fieldset legend="Bairro" style="min-width:200px;max-width:200px;min-height:110px">
+                    <h:inputHidden value="#{bairroBean.bairro.id}"/>
+
+                    <p:panelGrid columns="3">
+                        <h:outputText value="Nome"/>
+                        <p:inputText value="#{bairroBean.bairro.nome}"/>
+
+                        <p:menuButton value="Opções">
+                            <p:menuitem value="Salvar" action="#{bairroBean.salvar()}" update="growl" icon="ui-icon-disk"/>
+                            <p:menuitem value="Cancelar" action="#{bairroBean.cancelar()}" update="growl" icon="ui-icon-arrowrefresh-1-w"/>
+                            <p:separator />
+                            <p:menuitem value="Voltar Página Inicial" url="../../index.xhtml" icon="ui-icon-extlink"/>
+                        </p:menuButton>
+                    </p:panelGrid>
+                </p:fieldset>
+            </div>
+        </h:form>
+    </ui:define>
+</ui:composition>

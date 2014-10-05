@@ -15,35 +15,28 @@ and open the template in the editor.
 
     <ui:define name="content">
         <!--        Desenvolver Formularios das Categorias-->
-        <h:form>
-            <h:form id="formularioCate">
-                <p:growl
-                    id="growl"
-                    showDetail="true"
-                    sticky="false"/>
-                <p:fieldset legend="Categorias" style="min-width:200px;max-width:200px;min-height:110px">
+        <h:form id="formularioCate">
+            <p:growl
+                id="growl"
+                showDetail="true"
+                sticky="false"/>
+            <p:fieldset legend="Categorias" style="min-width:200px;max-width:200px;min-height:110px">
 
-                    <h:inputHidden value="#{categoriaBean.categoria.id}"/>
+                <h:inputHidden value="#{categoriaBean.categoria.id}"/>
 
-                    <p:panelGrid columns="2">
-                        <h:outputText value="Nome"/>
-                        <p:inputText value="#{categoriaBean.categoria.nome}"/>
+                <p:panelGrid columns="3">
+                    <h:outputText value="Nome"/>
+                    <p:inputText value="#{categoriaBean.categoria.nome}"/>
 
-                    </p:panelGrid>
-                    <div align="center">
-                        <p:commandButton
-                            ajax="false"
-                            value="Salvar"
-                            icon="ui-icon-disk"
-                            action="#{categoriaBean.salvar()}"/>
-                        <p:commandButton
-                            ajax="false"
-                            value="Cancelar"
-                            icon="ui-icon-cancel"
-                            action="#{categoriaBean.cancelar()}"/>
-                    </div>
-                </p:fieldset>
-            </h:form>
+
+                    <p:menuButton value="Opções">
+                        <p:menuitem value="Salvar" action="#{categoriaBean.salvar()}" update="growl" icon="ui-icon-disk"/>
+                        <p:menuitem value="Cancelar" action="#{categoriaBean.cancelar()}" update="growl" icon="ui-icon-arrowrefresh-1-w"/>
+                        <p:separator />
+                        <p:menuitem value="Voltar Página Inicial" url="../../index.xhtml" icon="ui-icon-extlink"/>
+                    </p:menuButton>  
+                </p:panelGrid>
+            </p:fieldset>
         </h:form>
     </ui:define>
 </ui:composition>

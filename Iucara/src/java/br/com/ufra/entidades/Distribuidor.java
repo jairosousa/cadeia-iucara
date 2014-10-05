@@ -29,18 +29,18 @@ import javax.xml.bind.annotation.XmlTransient;
  * @author Jairo Sousa
  */
 @Entity
-@Table(name = "batedor")
+@Table(name = "distribuidor")
 @XmlRootElement
 @NamedQueries({
-    @NamedQuery(name = "Batedor.findAll", query = "SELECT b FROM Batedor b"),
-    @NamedQuery(name = "Batedor.findById", query = "SELECT b FROM Batedor b WHERE b.id = :id"),
-    @NamedQuery(name = "Batedor.findByNome", query = "SELECT b FROM Batedor b WHERE b.nome = :nome"),
-    @NamedQuery(name = "Batedor.findByEndereco", query = "SELECT b FROM Batedor b WHERE b.endereco = :endereco"),
-    @NamedQuery(name = "Batedor.findByTelefone", query = "SELECT b FROM Batedor b WHERE b.telefone = :telefone"),
-    @NamedQuery(name = "Batedor.findByEmail", query = "SELECT b FROM Batedor b WHERE b.email = :email"),
-    @NamedQuery(name = "Batedor.findByLoggin", query = "SELECT b FROM Batedor b WHERE b.loggin = :loggin"),
-    @NamedQuery(name = "Batedor.findBySenha", query = "SELECT b FROM Batedor b WHERE b.senha = :senha")})
-public class Batedor implements Serializable {
+    @NamedQuery(name = "Distribuidor.findAll", query = "SELECT d FROM Distribuidor d"),
+    @NamedQuery(name = "Distribuidor.findById", query = "SELECT d FROM Distribuidor d WHERE d.id = :id"),
+    @NamedQuery(name = "Distribuidor.findByNome", query = "SELECT d FROM Distribuidor d WHERE d.nome = :nome"),
+    @NamedQuery(name = "Distribuidor.findByEndereco", query = "SELECT d FROM Distribuidor d WHERE d.endereco = :endereco"),
+    @NamedQuery(name = "Distribuidor.findByTelefone", query = "SELECT d FROM Distribuidor d WHERE d.telefone = :telefone"),
+    @NamedQuery(name = "Distribuidor.findByEmail", query = "SELECT d FROM Distribuidor d WHERE d.email = :email"),
+    @NamedQuery(name = "Distribuidor.findByLoggin", query = "SELECT d FROM Distribuidor d WHERE d.loggin = :loggin"),
+    @NamedQuery(name = "Distribuidor.findBySenha", query = "SELECT d FROM Distribuidor d WHERE d.senha = :senha")})
+public class Distribuidor implements Serializable {
     private static final long serialVersionUID = 1L;
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -65,22 +65,22 @@ public class Batedor implements Serializable {
     @Basic(optional = false)
     @Column(name = "senha")
     private String senha;
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "batedor")
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "distribuidor")
     private List<Compra> compraList;
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "batedor")
-    private List<Processamento> processamentoList;
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "distribuidor")
+    private List<Armazenamento> armazenamentoList;
     @JoinColumn(name = "bairro", referencedColumnName = "id")
     @ManyToOne(optional = false)
     private Bairro bairro;
 
-    public Batedor() {
+    public Distribuidor() {
     }
 
-    public Batedor(Integer id) {
+    public Distribuidor(Integer id) {
         this.id = id;
     }
 
-    public Batedor(Integer id, String nome, String endereco, String telefone, String email, String loggin, String senha) {
+    public Distribuidor(Integer id, String nome, String endereco, String telefone, String email, String loggin, String senha) {
         this.id = id;
         this.nome = nome;
         this.endereco = endereco;
@@ -156,12 +156,12 @@ public class Batedor implements Serializable {
     }
 
     @XmlTransient
-    public List<Processamento> getProcessamentoList() {
-        return processamentoList;
+    public List<Armazenamento> getArmazenamentoList() {
+        return armazenamentoList;
     }
 
-    public void setProcessamentoList(List<Processamento> processamentoList) {
-        this.processamentoList = processamentoList;
+    public void setArmazenamentoList(List<Armazenamento> armazenamentoList) {
+        this.armazenamentoList = armazenamentoList;
     }
 
     public Bairro getBairro() {
@@ -182,10 +182,10 @@ public class Batedor implements Serializable {
     @Override
     public boolean equals(Object object) {
         // TODO: Warning - this method won't work in the case the id fields are not set
-        if (!(object instanceof Batedor)) {
+        if (!(object instanceof Distribuidor)) {
             return false;
         }
-        Batedor other = (Batedor) object;
+        Distribuidor other = (Distribuidor) object;
         if ((this.id == null && other.id != null) || (this.id != null && !this.id.equals(other.id))) {
             return false;
         }
@@ -194,7 +194,7 @@ public class Batedor implements Serializable {
 
     @Override
     public String toString() {
-        return "br.com.ufra.entidades.Batedor[ id=" + id + " ]";
+        return "br.com.ufra.entidades.Distribuidor[ id=" + id + " ]";
     }
     
 }

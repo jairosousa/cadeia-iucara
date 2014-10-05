@@ -21,9 +21,7 @@ and open the template in the editor.
                      sticky="false"/>
 
             <p:fieldset legend="Compras">
-                <p:dataTable
-                    value="#{compraBean.compras}"
-                    var="compras">
+                
 
                     <p:column headerText="Data">
                         <h:outputText value="#{compras.data}">
@@ -68,7 +66,7 @@ and open the template in the editor.
                             </p:commandButton>
                         </div>
                     </p:column>
-                </p:dataTable>
+                
 
             </p:fieldset>
         </h:form>

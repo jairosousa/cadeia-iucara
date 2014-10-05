@@ -44,7 +44,7 @@ public class Categoria implements Serializable {
     @Column(name = "nome")
     private String nome;
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "categoria")
-    private List<Processamento> processamentoList;
+    private List<VinhoEmbalado> vinhoEmbaladoList;
 
     public Categoria() {
     }
@@ -75,12 +75,12 @@ public class Categoria implements Serializable {
     }
 
     @XmlTransient
-    public List<Processamento> getProcessamentoList() {
-        return processamentoList;
+    public List<VinhoEmbalado> getVinhoEmbaladoList() {
+        return vinhoEmbaladoList;
     }
 
-    public void setProcessamentoList(List<Processamento> processamentoList) {
-        this.processamentoList = processamentoList;
+    public void setVinhoEmbaladoList(List<VinhoEmbalado> vinhoEmbaladoList) {
+        this.vinhoEmbaladoList = vinhoEmbaladoList;
     }
 
     @Override

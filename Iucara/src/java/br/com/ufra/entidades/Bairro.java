@@ -7,22 +7,18 @@
 package br.com.ufra.entidades;
 
 import java.io.Serializable;
-import java.util.Date;
 import java.util.List;
 import javax.persistence.Basic;
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.JoinColumn;
-import javax.persistence.ManyToMany;
-import javax.persistence.ManyToOne;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
-import javax.persistence.Temporal;
-import javax.persistence.TemporalType;
 import javax.xml.bind.annotation.XmlRootElement;
 import javax.xml.bind.annotation.XmlTransient;
 
@@ -31,13 +27,13 @@ import javax.xml.bind.annotation.XmlTransient;
  * @author Jairo Sousa
  */
 @Entity
-@Table(name = "venda")
+@Table(name = "bairro")
 @XmlRootElement
 @NamedQueries({
-    @NamedQuery(name = "Venda.findAll", query = "SELECT v FROM Venda v"),
-    @NamedQuery(name = "Venda.findById", query = "SELECT v FROM Venda v WHERE v.id = :id"),
-    @NamedQuery(name = "Venda.findByData", query = "SELECT v FROM Venda v WHERE v.data = :data")})
-public class Venda implements Serializable {
+    @NamedQuery(name = "Bairro.findAll", query = "SELECT b FROM Bairro b"),
+    @NamedQuery(name = "Bairro.findById", query = "SELECT b FROM Bairro b WHERE b.id = :id"),
+    @NamedQuery(name = "Bairro.findByNome", query = "SELECT b FROM Bairro b WHERE b.nome = :nome")})
+public class Bairro implements Serializable {
     private static final long serialVersionUID = 1L;
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -45,25 +41,25 @@ public class Venda implements Serializable {
     @Column(name = "id")
     private Integer id;
     @Basic(optional = false)
-    @Column(name = "data")
-    @Temporal(TemporalType.DATE)
-    private Date data;
-    @ManyToMany(mappedBy = "vendaList")
-    private List<VinhoEmbalado> vinhoEmbaladoList;
-    @JoinColumn(name = "cliente", referencedColumnName = "id")
-    @ManyToOne(optional = false)
-    private Cliente cliente;
+    @Column(name = "nome")
+    private String nome;
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "bairro")
+    private List<Cliente> clienteList;
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "bairro")
+    private List<Batedor> batedorList;
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "bairro")
+    private List<Distribuidor> distribuidorList;
 
-    public Venda() {
+    public Bairro() {
     }
 
-    public Venda(Integer id) {
+    public Bairro(Integer id) {
         this.id = id;
     }
 
-    public Venda(Integer id, Date data) {
+    public Bairro(Integer id, String nome) {
         this.id = id;
-        this.data = data;
+        this.nome = nome;
     }
 
     public Integer getId() {
@@ -74,29 +70,39 @@ public class Venda implements Serializable {
         this.id = id;
     }
 
-    public Date getData() {
-        return data;
+    public String getNome() {
+        return nome;
     }
 
-    public void setData(Date data) {
-        this.data = data;
+    public void setNome(String nome) {
+        this.nome = nome;
     }
 
     @XmlTransient
-    public List<VinhoEmbalado> getVinhoEmbaladoList() {
-        return vinhoEmbaladoList;
+    public List<Cliente> getClienteList() {
+        return clienteList;
     }
 
-    public void setVinhoEmbaladoList(List<VinhoEmbalado> vinhoEmbaladoList) {
-        this.vinhoEmbaladoList = vinhoEmbaladoList;
+    public void setClienteList(List<Cliente> clienteList) {
+        this.clienteList = clienteList;
     }
 
-    public Cliente getCliente() {
-        return cliente;
+    @XmlTransient
+    public List<Batedor> getBatedorList() {
+        return batedorList;
     }
 
-    public void setCliente(Cliente cliente) {
-        this.cliente = cliente;
+    public void setBatedorList(List<Batedor> batedorList) {
+        this.batedorList = batedorList;
+    }
+
+    @XmlTransient
+    public List<Distribuidor> getDistribuidorList() {
+        return distribuidorList;
+    }
+
+    public void setDistribuidorList(List<Distribuidor> distribuidorList) {
+        this.distribuidorList = distribuidorList;
     }
 
     @Override
@@ -109,10 +115,10 @@ public class Venda implements Serializable {
     @Override
     public boolean equals(Object object) {
         // TODO: Warning - this method won't work in the case the id fields are not set
-        if (!(object instanceof Venda)) {
+        if (!(object instanceof Bairro)) {
             return false;
         }
-        Venda other = (Venda) object;
+        Bairro other = (Bairro) object;
         if ((this.id == null && other.id != null) || (this.id != null && !this.id.equals(other.id))) {
             return false;
         }
@@ -121,7 +127,7 @@ public class Venda implements Serializable {
 
     @Override
     public String toString() {
-        return "br.com.ufra.entidades.Venda[ id=" + id + " ]";
+        return this.nome;
     }
     
 }

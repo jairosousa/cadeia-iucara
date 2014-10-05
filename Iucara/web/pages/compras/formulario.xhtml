@@ -14,32 +14,42 @@ and open the template in the editor.
 
 
     <ui:define name="content">
-        <h:form>
-            <!--Desenvolver Formularios de compras-->
-
+        <!--Desenvolver Formularios de compras-->
+        <h:form id="form">
             <p:growl
                 id="growl"
                 showDetail="true"
                 sticky="false"/>
             <p:fieldset legend="Realizar Compra" style="min-width:200px;max-width:200px;min-height:110px">
-
                 <h:inputHidden value="#{compraBean.compra.id}"/>
 
                 <p:panelGrid columns="2">
                     <h:outputText value="Data"/>
-                    <p:inputText value="#{compraBean.compra.data}"/>
+                    <p:inputMask value="#{compraBean.compra.data}" mask="99/99/9999">
+                    <f:convertDateTime pattern="dd/MM/yyyy"/>
+                    </p:inputMask>
 
                     <h:outputText value="Quantidade"/>
                     <p:inputText value="#{compraBean.compra.quantidade}"/>
 
                     <h:outputText value="Atravessador"/>
                     <p:selectOneMenu value="#{compraBean.compra.atravessador}"
-                                     converter="cestoAcaiConverter">
+                                     converter="atravessadorConverter">
                         <f:selectItem itemLabel="Selecione" noSelectionOption="true"/>
                         <f:selectItems value="#{atravessadorBean.atravessadores}"
                                        var="atra"
                                        itemLabel="#{atra.nome}"
                                        itemValue="#{atra}"/>
+                    </p:selectOneMenu>
+
+                    <h:outputText value="Batedor"/>
+                    <p:selectOneMenu value="#{compraBean.compra.batedor}"
+                                     converter="batedorConverter">
+                        <f:selectItem itemLabel="Selecione" noSelectionOption="true"/>
+                        <f:selectItems value="#{batedorBean.batedores}"
+                                       var="bate"
+                                       itemLabel="#{bate.nome}"
+                                       itemValue="#{bate}"/>
                     </p:selectOneMenu>
 
                     <h:outputText value="Cesto Açai"/>
@@ -52,17 +62,8 @@ and open the template in the editor.
                                        itemValue="#{cesto}"/>
                     </p:selectOneMenu>
 
-                    <h:outputText value="Batedor"/>
-                    <p:selectOneMenu value="#{compraBean.compra.batedor}"
-                                     converter="cestoAcaiConverter">
-                        <f:selectItem itemLabel="Selecione" noSelectionOption="true"/>
-                        <f:selectItems value="#{batedorBean.batedores}"
-                                       var="bate"
-                                       itemLabel="#{bate.nome}"
-                                       itemValue="#{bate}"/>
-                    </p:selectOneMenu>
                 </p:panelGrid>
-                
+
                 <div align="center">
                     <p:commandButton
                         ajax="false"
@@ -75,6 +76,8 @@ and open the template in the editor.
                         icon="ui-icon-cancel"
                         action="#{compraBean.cancelar()}"/>
                 </div>
+                
+                
             </p:fieldset>
         </h:form>
     </ui:define>

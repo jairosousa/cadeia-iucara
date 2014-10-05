@@ -5,15 +5,13 @@
  */
 package br.com.ufra.bean;
 
-import br.com.ufra.entidades.Batedor;
-import br.com.ufra.rn.BatedorRN;
+import br.com.ufra.entidades.Distribuidor;
+import br.com.ufra.rn.DistribuidorRN;
 import java.io.Serializable;
 import java.util.List;
 import javax.faces.application.FacesMessage;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.RequestScoped;
-import javax.faces.bean.SessionScoped;
-import javax.faces.bean.ViewScoped;
 import javax.faces.context.FacesContext;
 
 /**
@@ -22,27 +20,26 @@ import javax.faces.context.FacesContext;
  */
 @ManagedBean
 @RequestScoped
-public class BatedorBean implements Serializable {
+public class DisbribuidorBean implements Serializable {
 
-    private Batedor batedor = new Batedor();
-    private BatedorRN rn = new BatedorRN();
-    private List<Batedor> batedores;
+    private Distribuidor distribuidor = new Distribuidor();
+    private DistribuidorRN rn = new DistribuidorRN();
+    private List<Distribuidor> distribuidores;
 
-    public Batedor getBatedor() {
-        return batedor;
+    public Distribuidor getDistribuidor() {
+        return distribuidor;
     }
 
-    public void setBatedor(Batedor batedor) {
-        this.batedor = batedor;
+    public void setDistribuidor(Distribuidor distribuidor) {
+        this.distribuidor = distribuidor;
     }
 
-    public List<Batedor> getBatedores() {
-        this.batedores = rn.obterTodos();
-        return batedores;
+    public List<Distribuidor> getDistribuidores() {
+        return this.distribuidores = rn.obterTodos();
     }
 
     public String salvar() {
-        if (rn.salvar(batedor)) {
+        if (rn.salvar(distribuidor)) {
             FacesMessage fm = new FacesMessage(FacesMessage.SEVERITY_INFO, "Sucesso", "Cadastro feito com Sucesso");
             FacesContext.getCurrentInstance().addMessage(null, fm);
             return "lista.xhtml";
@@ -55,7 +52,7 @@ public class BatedorBean implements Serializable {
     }
 
     public String excluir() {
-        if (rn.excluir(batedor)) {
+        if (rn.excluir(distribuidor)) {
             FacesMessage fm = new FacesMessage(FacesMessage.SEVERITY_INFO, "Sucesso", "Cadastro foi excluído com exito");
             FacesContext.getCurrentInstance().addMessage(null, fm);
             return "lista.xhtml";
@@ -77,5 +74,4 @@ public class BatedorBean implements Serializable {
     public String cancelar() {
         return "lista.xhtml";
     }
-
 }
