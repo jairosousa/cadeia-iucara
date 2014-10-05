@@ -1,0 +1,77 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+To change this license header, choose License Headers in Project Properties.
+To change this template file, choose Tools | Templates
+and open the template in the editor.
+-->
+<!DOCTYPE html>
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+                xmlns:ui="http://java.sun.com/jsf/facelets"
+                xmlns:h="http://java.sun.com/jsf/html"
+                xmlns:p="http://primefaces.org/ui" template="../../index.xhtml"
+                xmlns:f="http://xmlns.jcp.org/jsf/core">
+
+
+    <ui:define name="content">
+        <h:form id="formularioDist">
+
+            <p:growl
+                id="growl"
+                showDetail="true"
+                sticky="false"/>
+            
+            <div align="center">
+                <p:fieldset legend="Distribuidores" style="min-width:200px;max-width:200px;min-height:110px">
+
+                    <h:inputHidden value="#{disbribuidorBean.distribuidor.id}"/>
+
+                    <p:panelGrid columns="2">
+                        <h:outputText value="Nome"/>
+                        <p:inputText value="#{disbribuidorBean.distribuidor.nome}"/>
+
+                        <h:outputText value="Endereco"/>
+                        <p:inputText value="#{disbribuidorBean.distribuidor.endereco}"/>
+
+                        <h:outputText value="Bairro"/>
+                        <p:selectOneMenu value="#{disbribuidorBean.distribuidor.bairro}"
+                                         converter="bairroConverter">
+                            <f:selectItem itemLabel="Selecione" noSelectionOption="true"/>
+                            <f:selectItems value="#{bairroBean.bairros}" var="bairros"
+                                           itemLabel="#{bairros.nome}"
+                                           itemValue="#{bairros}"/>
+                        </p:selectOneMenu>
+
+                        <h:outputText value="Telefone"/>
+                        <p:inputMask value="#{disbribuidorBean.distribuidor.telefone}"
+                                     mask="(99) 9999-9999"/>
+
+                        <h:outputText value="Email"/>
+                        <p:inputText value="#{disbribuidorBean.distribuidor.email}"/>
+
+                        <h:outputText value="Loggin"/>
+                        <p:inputText value="#{disbribuidorBean.distribuidor.loggin}"/>
+
+                        <h:outputText value="Senha"/>
+                        <p:keyboard value="#{disbribuidorBean.distribuidor.senha}"
+                                    password="true" keypadOnly="true" layout="alphabetic"/>
+
+                    </p:panelGrid>
+
+                    <div align="center">
+                        <p:commandButton
+                            ajax="false"
+                            value="Salvar"
+                            icon="ui-icon-disk"
+                            action="#{disbribuidorBean.salvar()}"/>
+                        <p:commandButton
+                            ajax="false"
+                            value="Cancelar"
+                            icon="ui-icon-cancel"
+                            action="#{disbribuidorBean.cancelar()}"/>
+                    </div>
+
+                </p:fieldset>
+            </div>
+        </h:form>
+    </ui:define>
+</ui:composition>
