@@ -5,6 +5,7 @@
  */
 package br.com.ufra.dao;
 
+import br.com.ufra.dao.service.GenericDAO;
 import java.util.List;
 import javax.persistence.EntityExistsException;
 import javax.persistence.EntityManager;
@@ -14,11 +15,18 @@ import javax.persistence.Query;
  *
  * @author Jairo Sousa
  */
-public class GenericoDAO<T> implements InterfaceDao<T> {
+public class GenericoDAOImpl<T> implements GenericDAO<T> {
 
-    private EntityManager em = FabricaConexao.obterFabrica().createEntityManager();
+    private final EntityManager em;
 
+    public GenericoDAOImpl(EntityManager em) {
+        this.em = em;
+    }
     
+    public GenericoDAOImpl(){
+        this.em = FabricaDAO.obterFabrica().createEntityManager();
+    }
+
     public boolean iniciarTransacao() {
         try {
             if (em.getTransaction().isActive()) {
@@ -88,7 +96,7 @@ public class GenericoDAO<T> implements InterfaceDao<T> {
     public boolean excluir(T o) {
         try {
             this.iniciarTransacao();
-            em.remove(o);
+            em.remove(em.merge(o));
             this.confirmarTransacao();
             return true;
         } catch (Exception e) {
@@ -119,5 +127,8 @@ public class GenericoDAO<T> implements InterfaceDao<T> {
         Query q = em.createNamedQuery(query);
         return (List<T>) q.getResultList();
     }
-
+    
+    public EntityManager getEntityManager(){
+        return em;
+    }
 }

@@ -3,10 +3,9 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-
 package br.com.ufra.rn;
 
-import br.com.ufra.dao.GenericoDAO;
+import br.com.ufra.dao.BatedorDAOImpl;
 import br.com.ufra.entidades.Batedor;
 import java.util.ArrayList;
 import java.util.List;
@@ -16,9 +15,9 @@ import java.util.List;
  * @author Jairo Sousa
  */
 public class BatedorRN {
-    
-    private GenericoDAO<Batedor> dao = new GenericoDAO<Batedor>();
-    
+
+    private BatedorDAOImpl dao = new BatedorDAOImpl();
+
     public Batedor obter(Integer id) {
         if (id == null) {
             return null;
@@ -26,25 +25,19 @@ public class BatedorRN {
             return dao.obter(Batedor.class, id);
         }
     }
-    
+
     public List<Batedor> obterTodos() {
         return dao.obterTodos(Batedor.class);
     }
-    
-    public List<Batedor> obterAtravessador(String busca) {
-        if (busca == null || busca.length() < 3) {
-            return null;
-        } else {
-            List<Batedor> resposta = new ArrayList<Batedor>();
-            for (Batedor batedor : obterTodos()) {
-                if (batedor.getNome().toUpperCase().indexOf(busca.toUpperCase()) >= 0) {
-                    resposta.add(batedor);
-                }
-            }
-            return resposta;
-        }
+
+    public List<Batedor> obterTodosOrdenado() {
+        return dao.obterTodosOrdenado("nome");
     }
-    
+
+    public Batedor obterNome(String nome) {
+        return dao.obterNome(nome);
+    }
+
     public boolean salvar(Batedor batedor) {
         if (batedor.getNome().equals("")) {
             return false;
@@ -56,6 +49,7 @@ public class BatedorRN {
             }
         }
     }
+
     public boolean excluir(Batedor batedor) {
         if (batedor.getId() == null) {
             return false;
@@ -63,5 +57,5 @@ public class BatedorRN {
             return dao.excluir(batedor);
         }
     }
-    
+
 }

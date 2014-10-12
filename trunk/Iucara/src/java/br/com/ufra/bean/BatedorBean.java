@@ -37,7 +37,7 @@ public class BatedorBean implements Serializable {
     }
 
     public List<Batedor> getBatedores() {
-        this.batedores = rn.obterTodos();
+        this.batedores = rn.obterTodosOrdenado();
         return batedores;
     }
 
