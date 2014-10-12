@@ -5,7 +5,7 @@
  */
 package br.com.ufra.rn;
 
-import br.com.ufra.dao.GenericoDAO;
+import br.com.ufra.dao.BairroDAOImpl;
 import br.com.ufra.entidades.Bairro;
 import java.util.ArrayList;
 import java.util.List;
@@ -16,7 +16,7 @@ import java.util.List;
  */
 public class BairroRN {
 
-    private GenericoDAO<Bairro> dao = new GenericoDAO<Bairro>();
+    private BairroDAOImpl dao = new BairroDAOImpl();
 
     public Bairro obter(Integer id) {
         if (id == null) {
@@ -28,6 +28,14 @@ public class BairroRN {
 
     public List<Bairro> obterTodos() {
         return dao.obterTodos(Bairro.class);
+    }
+
+    public List<Bairro> obterTodosOrdenado() {
+        return dao.obterTodosOrdenado("nome");
+    }
+
+    public Bairro obterNome(String nome) {
+        return dao.obterNome(nome);
     }
 
     public List<Bairro> obterBairro(String busca) {

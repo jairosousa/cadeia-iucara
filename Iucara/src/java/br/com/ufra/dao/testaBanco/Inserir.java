@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package br.com.ufra.dao;
+package br.com.ufra.dao.testaBanco;
 
 import br.com.ufra.entidades.Bairro;
 import br.com.ufra.entidades.Batedor;

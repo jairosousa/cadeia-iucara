@@ -35,7 +35,7 @@ public class BairroBean implements Serializable {
     }
 
     public List<Bairro> getBairros() {
-        this.bairros = rn.obterTodos();
+        this.bairros = rn.obterTodosOrdenado();
         return bairros;
     }
 

@@ -5,8 +5,8 @@
  */
 package br.com.ufra.rn;
 
-import br.com.ufra.dao.GenericoDAO;
 import br.com.ufra.entidades.Distribuidor;
+import br.com.ufra.dao.DistribuidorDAOImpl;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -16,7 +16,7 @@ import java.util.List;
  */
 public class DistribuidorRN {
 
-    private GenericoDAO<Distribuidor> dao = new GenericoDAO<Distribuidor>();
+    private DistribuidorDAOImpl dao = new DistribuidorDAOImpl();
 
     public Distribuidor obter(Integer id) {
         if (id == null) {
@@ -28,6 +28,14 @@ public class DistribuidorRN {
 
     public List<Distribuidor> obterTodos() {
         return dao.obterTodos(Distribuidor.class);
+    }
+
+    public List<Distribuidor> obterTodosOrdenado() {
+        return dao.obterTodosOrdenado("nome");
+    }
+
+    public Distribuidor obterNome(String nome) {
+        return dao.obterNome(nome);
     }
 
     public List<Distribuidor> obterDistribuidor(String busca) {

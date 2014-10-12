@@ -3,7 +3,12 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package br.com.ufra.dao;
+package br.com.ufra.dao.testaBanco;
+
+import br.com.ufra.entidades.Bairro;
+import br.com.ufra.rn.BairroRN;
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  *
@@ -13,7 +18,17 @@ public class testaInserirComerciante {
 
     public static void main(String[] args) {
 
-
+        Bairro bairro = new Bairro();
+        
+        BairroRN rn = new BairroRN();
+        
+        List<Bairro> bairros = new ArrayList<>();
+        
+        bairros = rn.obterTodosOrdenado();
+        
+        for (Bairro b : bairros) {
+            System.out.println(b.getNome()+"\n");
+        }
         
         
         

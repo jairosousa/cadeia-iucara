@@ -35,7 +35,7 @@ public class DisbribuidorBean implements Serializable {
     }
 
     public List<Distribuidor> getDistribuidores() {
-        return this.distribuidores = rn.obterTodos();
+        return this.distribuidores = rn.obterTodosOrdenado();
     }
 
     public String salvar() {
