@@ -6,7 +6,7 @@
 
 package br.com.ufra.rn;
 
-import br.com.ufra.dao.GenericoDAO;
+import br.com.ufra.dao.GenericoDAOImpl;
 import br.com.ufra.entidades.Categoria;
 import java.util.ArrayList;
 import java.util.List;
@@ -17,7 +17,7 @@ import java.util.List;
  */
 public class CategoriaRN {
     
-    private GenericoDAO<Categoria> dao = new GenericoDAO<Categoria>();
+    private GenericoDAOImpl<Categoria> dao = new GenericoDAOImpl<Categoria>();
     
     public Categoria obter(Integer id) {
         if (id == null) {
@@ -31,7 +31,7 @@ public class CategoriaRN {
         return dao.obterTodos(Categoria.class);
     }
     
-    public List<Categoria> obterAtravessador(String busca) {
+    public List<Categoria> obterCategoria(String busca) {
         if (busca == null || busca.length() < 3) {
             return null;
         } else {

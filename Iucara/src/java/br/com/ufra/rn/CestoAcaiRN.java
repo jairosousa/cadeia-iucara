@@ -6,7 +6,7 @@
 
 package br.com.ufra.rn;
 
-import br.com.ufra.dao.GenericoDAO;
+import br.com.ufra.dao.GenericoDAOImpl;
 import br.com.ufra.entidades.CestoAcai;
 import java.util.ArrayList;
 import java.util.List;
@@ -17,7 +17,7 @@ import java.util.List;
  */
 public class CestoAcaiRN {
     
-    private GenericoDAO<CestoAcai> dao = new GenericoDAO<CestoAcai>();
+    private GenericoDAOImpl<CestoAcai> dao = new GenericoDAOImpl<CestoAcai>();
     
     public CestoAcai obter(Integer id) {
         if (id == null) {

@@ -10,48 +10,53 @@ and open the template in the editor.
                 xmlns:h="http://java.sun.com/jsf/html"
                 xmlns:p="http://primefaces.org/ui" template="../../index.xhtml"
                 xmlns:f="http://xmlns.jcp.org/jsf/core">
-
+    
 
     <ui:define name="content">
 
         <h:form id="listagemBairro">
+            <div align="center">
+                <h:panelGrid width="700" >
+                    <p:panel id="panel" header="Bairros">
 
-            <p:growl id="grow"
-                     showDetail="true"
-                     sticky="false"/>
+                        <p:growl id="grow"
+                                 showDetail="true"
+                                 sticky="false"/>
 
-            <p:fieldset legend="Bairros">
-                <p:dataTable
-                    value="#{bairroBean.bairros}"
-                    var="bairros">
-                    <p:column headerText="Nome">
-                        <h:outputText value="#{bairros.nome}"/>
-                    </p:column>
+                        <p:dataTable var="bairros" value="#{bairroBean.bairros}" 
+                                     rows="5" paginator="true" id="bars"
+                                     paginatorTemplate="{CurrentPageReport}  {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}"
+                                     rowsPerPageTemplate="6,12,16">
 
+                            <p:column headerText="Nome">
+                                <h:outputText value="#{bairros.nome}"/>
+                            </p:column>
 
-                    <p:column headerText="Operações">
-                        <div align="center">
-                            <p:commandButton
-                                ajax="false"
-                                icon="ui-icon-pencil"
-                                action="#{bairroBean.editar()}">
-                                <f:setPropertyActionListener
-                                    target="#{bairroBean.bairro}"
-                                    value="#{bairros}"/>
-                            </p:commandButton>
+                            <p:column headerText="Operações">
+                                <div align="center">
+                                    <p:commandButton
+                                        ajax="false"
+                                        icon="ui-icon-pencil"
+                                        action="#{bairroBean.editar()}">
+                                        <f:setPropertyActionListener
+                                            target="#{bairroBean.bairro}"
+                                            value="#{bairros}"/>
+                                    </p:commandButton>
 
-                            <p:commandButton
-                                ajax="false"
-                                icon="ui-icon-trash"
-                                action="#{bairroBean.excluir()}">
-                                <f:setPropertyActionListener
-                                    target="#{bairroBean.bairro}"
-                                    value="#{bairros}"/>
-                            </p:commandButton>
-                        </div>
-                    </p:column>
-                </p:dataTable>
-            </p:fieldset>
+                                    <p:commandButton
+                                        ajax="false"
+                                        icon="ui-icon-trash"
+                                        action="#{bairroBean.excluir()}">
+                                        <f:setPropertyActionListener
+                                            target="#{bairroBean.bairro}"
+                                            value="#{bairros}"/>
+                                    </p:commandButton>
+                                </div>
+                            </p:column>
+                        </p:dataTable>
+                    </p:panel>
+                </h:panelGrid>
+            </div>
         </h:form>
     </ui:define>
 </ui:composition>

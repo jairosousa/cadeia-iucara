@@ -1,0 +1,114 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+To change this license header, choose License Headers in Project Properties.
+To change this template file, choose Tools | Templates
+and open the template in the editor.
+-->
+<!DOCTYPE html>
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+                xmlns:ui="http://java.sun.com/jsf/facelets"
+                xmlns:h="http://java.sun.com/jsf/html"
+                xmlns:p="http://primefaces.org/ui" template="../../index.xhtml"
+                xmlns:c="http://java.sun.com/jsp/jstl/core"
+                xmlns:f="http://xmlns.jcp.org/jsf/core">
+
+
+    <ui:define name="content">
+        <h:form>
+            <p:growl id="grow"
+                     showDetail="true"
+                     sticky="false"/>
+
+            <div align="center">
+                <h:panelGrid width="1000" >
+                    <p:panel id="panel" header="Armazenamentos">
+                        <p:dataTable var="armaz" value="#{armazenamentoBean.armazenamentos}" 
+                                     rows="5" paginator="true" id="bars"
+                                     paginatorTemplate="{CurrentPageReport}  {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}"
+                                     rowsPerPageTemplate="6,12,16">
+
+                            <p:column headerText="Código">
+                                <div align="center"><h:outputText value="#{armaz.id}"/></div>
+                            </p:column>
+
+                            <p:column headerText="Distribuidor">
+                                <h:outputText value="#{armaz.distribuidor.nome}"/>
+                            </p:column>
+
+                            <p:column headerText="Cod. Cesto Dist">
+                                <h:outputText value="#{armaz.cestodistribuidor.id}"/>
+                            </p:column>
+
+                            <p:column headerText="Data">
+                                <h:outputText value="#{armaz.data}">
+                                    <f:convertDateTime pattern="dd/MM/yyyy"/>
+                                </h:outputText>
+                            </p:column>
+
+                            <p:column headerText="Quantidade">
+                                <h:outputText value="#{armaz.quantidade}"/>
+                            </p:column>
+
+                            <p:column headerText="Cestos Açai">
+                                <div align="center"><p:commandButton type="button" onclick="PF('dlg3').show();"
+                                                                     icon="ui-icon-zoomout"/></div>
+                            </p:column>
+
+                            <p:column headerText="Operações">
+                                <div align="center">
+                                    <p:commandButton
+                                        ajax="false"
+                                        icon="ui-icon-pencil"
+                                        action="#{armazenamentoBean.editar()}">
+                                        <f:setPropertyActionListener
+                                            target="#{armazenamentoBean.armazenamento}"
+                                            value="#{armaz}"/>
+                                    </p:commandButton>
+
+                                    <p:commandButton
+                                        ajax="false"
+                                        icon="ui-icon-trash"
+                                        action="#{armazenamentoBean.excluir()}">
+                                        <f:setPropertyActionListener
+                                            target="#{armazenamentoBean.armazenamento}"
+                                            value="#{armaz}"/>
+                                    </p:commandButton>
+                                </div>
+                            </p:column>
+
+                        </p:dataTable>
+                    </p:panel> 
+                </h:panelGrid>
+            </div>
+
+            <p:dialog header="Effects" widgetVar="dlg3" showEffect="explode" hideEffect="bounce" height="100">
+                <p:dataTable id="checkboxDT" var="cestoAcai" value="#{armazenamentoBean.cestosAcai}" style="margin-bottom:0">
+
+                    <p:column headerText="Id">
+                        <h:outputText value="#{cestoAcai.id}" />
+                    </p:column>
+
+                    <p:column headerText="Data">
+                        <h:outputText value="#{cestoAcai.data}">
+                            <f:convertDateTime pattern="dd/MM/yyyy"/>
+                        </h:outputText>
+                    </p:column>
+
+                    <p:column headerText="Origem">
+                        <h:outputText value="#{cestoAcai.origem}" />
+                    </p:column>
+
+                    <p:column headerText="Quantidade">
+                        <h:outputText value="#{cestoAcai.quantidade}" />
+                    </p:column>
+
+                    <p:column headerText="Tipo">
+                        <h:outputText value="#{cestoAcai.tipo}" />
+                    </p:column>
+
+                </p:dataTable>
+            </p:dialog>
+
+        </h:form>
+    </ui:define>
+</ui:composition>

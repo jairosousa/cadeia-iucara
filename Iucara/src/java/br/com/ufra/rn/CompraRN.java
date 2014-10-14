@@ -6,7 +6,7 @@
 
 package br.com.ufra.rn;
 
-import br.com.ufra.dao.GenericoDAO;
+import br.com.ufra.dao.GenericoDAOImpl;
 import br.com.ufra.entidades.Compra;
 import java.util.ArrayList;
 import java.util.List;
@@ -17,7 +17,7 @@ import java.util.List;
  */
 public class CompraRN {
     
-    private GenericoDAO<Compra> dao = new GenericoDAO<Compra>();
+    private GenericoDAOImpl<Compra> dao = new GenericoDAOImpl<Compra>();
     
     public Compra obter(Integer id) {
         if (id == null) {
