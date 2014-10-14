@@ -23,30 +23,27 @@ and open the template in the editor.
 
             <div align="center">
                 <h:panelGrid width="900" style="border: none">
-                    <p:panel header="Cestos de açai">
+                    <p:panel header="Cestos Distribuidor">
                         <p:dataTable
-                            value="#{cestoAcaiBean.cestosAcai}"
-                            var="cestoAcai"
-                            rows="5" paginator="true" id="bars"
+                            value="#{cestoDistribuidorBean.cestos}"
+                            var="cestos"
+                            rows="5" paginator="true" id="cest"
                             paginatorTemplate="{CurrentPageReport}  {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}"
                             rowsPerPageTemplate="6,12,16">
 
                             <p:column headerText="Código">
                                 <div align="center">
-                                    <h:outputText value="#{cestoAcai.id}"/>
+                                    <h:outputText value="#{cestos.id}"/>
                                 </div>
                             </p:column>
 
                             <p:column headerText="Tipo Cesto">
-                                <h:outputText value="#{cestoAcai.tipo}"/>
+                                <h:outputText value="#{cestos.tipo}"/>
                             </p:column>
 
-                            <p:column headerText="Origem">
-                                <h:outputText value="#{cestoAcai.origem}"/>
-                            </p:column>
-                            <p:column headerText="Quantidade">
+                            <p:column headerText="Capacidade(kg)">
                                 <div align="center">
-                                    <h:outputText value="#{cestoAcai.quantidade}"/>
+                                    <h:outputText value="#{cestos.capacidade}"/>
                                 </div>
                             </p:column>
 
@@ -55,10 +52,10 @@ and open the template in the editor.
                                     <p:commandButton
                                         ajax="false"
                                         icon="ui-icon-pencil"
-                                        action="#{cestoAcaiBean.editar()}">
+                                        action="#{cestoDistribuidorBean.editar()}">
                                         <f:setPropertyActionListener
-                                            target="#{cestoAcaiBean.cestoAcai}"
-                                            value="#{cestoAcai}"/>
+                                            target="#{cestoDistribuidorBean.cesto}"
+                                            value="#{cestos}"/>
                                     </p:commandButton>
 
                                     <p:commandButton
@@ -66,8 +63,8 @@ and open the template in the editor.
                                         icon="ui-icon-trash"
                                         action="#{cestoAcaiBean.excluir()}">
                                         <f:setPropertyActionListener
-                                            target="#{cestoAcaiBean.cestoAcai}"
-                                            value="#{cestoAcai}"/>
+                                            target="#{cestoDistribuidorBean.cesto}"
+                                            value="#{cestos}"/>
                                     </p:commandButton>
                                 </div>
                             </p:column>

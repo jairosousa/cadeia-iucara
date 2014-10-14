@@ -6,8 +6,7 @@
 
 package br.com.ufra.rn;
 
-import br.com.ufra.dao.GenericoDAO;
-import br.com.ufra.entidades.Compra;
+import br.com.ufra.dao.GenericoDAOImpl;
 import br.com.ufra.entidades.Processamento;
 import java.util.ArrayList;
 import java.util.List;
@@ -18,7 +17,7 @@ import java.util.List;
  */
 public class ProcessamentoRN {
     
-    private GenericoDAO<Processamento> dao = new GenericoDAO<Processamento>();
+    private GenericoDAOImpl<Processamento> dao = new GenericoDAOImpl<Processamento>();
     
     public Processamento obter(Integer id) {
         if (id == null) {
@@ -30,20 +29,6 @@ public class ProcessamentoRN {
     
     public List<Processamento> obterTodos() {
         return dao.obterTodos(Processamento.class);
-    }
-    
-    public List<Processamento> obterAtravessador(String busca) {
-        if (busca == null || busca.length() < 3) {
-            return null;
-        } else {
-            List<Processamento> resposta = new ArrayList<Processamento>();
-            for (Processamento processamento : obterTodos()) {
-                if (processamento.getQuantidade() >= 0) {
-                    resposta.add(processamento);
-                }
-            }
-            return resposta;
-        }
     }
     
     public boolean salvar(Processamento processamento) {

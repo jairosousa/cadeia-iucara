@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+To change this license header, choose License Headers in Project Properties.
+To change this template file, choose Tools | Templates
+and open the template in the editor.
+-->
+<!DOCTYPE html>
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+                xmlns:ui="http://java.sun.com/jsf/facelets"
+                xmlns:h="http://java.sun.com/jsf/html"
+                xmlns:p="http://primefaces.org/ui" template="../../index.xhtml"
+                xmlns:c="http://java.sun.com/jsp/jstl/core"
+                xmlns:f="http://xmlns.jcp.org/jsf/core">
+
+
+    <ui:define name="content">
+        <!--Formulario Bairro-->
+        <h:form id="formularioCestoDist">
+
+            <div align="center">
+                <p:panel id="panel" header="Cesto Distribuidor">
+
+                    <p:growl
+                        id="growl"
+                        showDetail="true"
+                        sticky="false"/>
+                    <h:inputHidden value="#{cestoDistribuidorBean.cesto.id}"/>
+
+                    <h:panelGrid columns="2" style="margin-bottom:10px" cellpadding="5" columnClasses="label, value">
+
+                        <h:outputText value="Tipo Cesto"/>
+                        <p:selectOneListbox value="#{cestoDistribuidorBean.cesto.tipo}">
+                            <f:selectItem itemLabel="Paneiro" itemValue="Paneiro"/>
+                            <f:selectItem itemLabel="Caixa" itemValue="Caixa"/>
+                            <f:selectItem itemLabel="Saca" itemValue="Saca"/>
+                        </p:selectOneListbox>
+
+                        <h:outputText  value="Capacidade(kg)"/>
+                        <p:inputText id="nome" value="#{cestoDistribuidorBean.cesto.capacidade}"
+                                     required="true" label="Capa" >
+                            <f:validateLength maximum="50" minimum="2"/>
+                        </p:inputText>
+
+                    </h:panelGrid><br/>
+                    <div align="center">
+                        <p:menuButton value="Opções">
+                            <p:menuitem value="Salvar" action="#{cestoDistribuidorBean.salvar()}" update="growl" icon="ui-icon-disk"/>
+                            <p:menuitem value="Cancelar" action="#{cestoDistribuidorBean.cancelar()}" update="growl" icon="ui-icon-arrowrefresh-1-w"/>
+                            <p:separator />
+                            <p:menuitem value="Voltar Página Inicial" url="../../index.xhtml" icon="ui-icon-extlink"/>
+                        </p:menuButton>
+                    </div>
+                </p:panel>
+            </div>
+        </h:form>
+    </ui:define>
+</ui:composition>

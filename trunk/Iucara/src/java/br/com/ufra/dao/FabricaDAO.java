@@ -5,6 +5,7 @@
  */
 package br.com.ufra.dao;
 
+import br.com.ufra.dao.service.ArmazenamentoDAO;
 import br.com.ufra.dao.service.BairroDAO;
 import br.com.ufra.dao.service.BatedorDAO;
 import br.com.ufra.dao.service.DistribuidorDAO;
@@ -53,6 +54,9 @@ public class FabricaDAO {
     }
     public static DistribuidorDAO criarDistribuidorDAO() {
         return new DistribuidorDAOImpl(fabrica.createEntityManager());
+    }
+    public static ArmazenamentoDAO criarArmazenamentoDAO() {
+        return new ArmazenamentoDAOImpl(fabrica.createEntityManager());
     }
 
 }

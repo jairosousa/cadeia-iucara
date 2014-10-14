@@ -1,0 +1,103 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+To change this license header, choose License Headers in Project Properties.
+To change this template file, choose Tools | Templates
+and open the template in the editor.
+-->
+<!DOCTYPE html>
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+                xmlns:ui="http://java.sun.com/jsf/facelets"
+                xmlns:h="http://java.sun.com/jsf/html"
+                xmlns:p="http://primefaces.org/ui" template="../../index.xhtml"
+                xmlns:c="http://java.sun.com/jsp/jstl/core"
+                xmlns:f="http://xmlns.jcp.org/jsf/core">
+
+
+    <ui:define name="content">
+        <h:form>
+            <!--Desenvolver Formulario de Armazenamento-->
+            <p:growl
+                id="growl"
+                showDetail="true"
+                sticky="false"/>
+
+            <div align="center">
+                <p:panel header="Armazenamento">
+                    
+                    <h:inputHidden value="#{armazenamentoBean.armazenamento.id}"/>
+                    
+                    <h:panelGrid columns="2" style="margin-bottom:10px" cellpadding="5" columnClasses="label, value">
+                        <h:outputText value="Distribuidor"/>
+                        
+                        
+                        <p:selectOneMenu value="#{armazenamentoBean.armazenamento.distribuidor}"
+                                         converter="distribuidorConverter">
+                            <f:selectItem itemLabel="Selecione" noSelectionOption="true"/>
+                            <f:selectItems value="#{disbribuidorBean.distribuidores}" var="distribuidores"
+                                           itemLabel="#{distribuidores.nome}"
+                                           itemValue="#{distribuidores}"/>
+                        </p:selectOneMenu>
+
+                        <h:outputText value="Cesto Distribuidor"/>
+                        <p:selectOneMenu value="#{armazenamentoBean.armazenamento.cestodistribuidor}"
+                                         converter="cestoDistConverter">
+                            <f:selectItem itemLabel="Selecione" noSelectionOption="true"/>
+                            <f:selectItems value="#{cestoDistribuidorBean.cestos}" var="cestos"
+                                           itemLabel="Cod:#{cestos.id}-Capacidade:#{cestos.capacidade}"
+                                           itemValue="#{cestos}"/>
+                        </p:selectOneMenu>
+
+                        <h:outputLabel for="mask" value="Data"/>
+                        <p:calendar value="#{armazenamentoBean.armazenamento.data}"
+                                    id="mask" pattern="dd/MM/yyyy" mask="true" showOn="button">
+                            
+                        </p:calendar>
+
+                        <h:outputText value="Quantidade"/>
+                        <p:inputText value="#{armazenamentoBean.armazenamento.quantidade}"/>
+
+                    </h:panelGrid>
+                </p:panel>
+
+                <p:dataTable id="checkboxDT" var="cestoAcai" value="#{cestoAcaiBean.cestosAcai}" selection="#{armazenamentoBean.armazenamento.cestoAcaiList}" rowKey="#{cestoAcai.id}" style="margin-bottom:0">
+                    <f:facet name="header">
+                        Adicionar Cestos de Açaí
+                    </f:facet>
+
+                    <p:column selectionMode="multiple" style="width:16px;text-align:center"/>
+                    <p:column headerText="Id">
+                        <h:outputText value="#{cestoAcai.id}" />
+                    </p:column>
+
+                    <p:column headerText="Data">
+                        <h:outputText value="#{cestoAcai.data}">
+                            <f:convertDateTime pattern="dd/MM/yyyy"/>
+                        </h:outputText>
+                    </p:column>
+                    
+                    <p:column headerText="Origem">
+                        <h:outputText value="#{cestoAcai.origem}" />
+                    </p:column>
+                    
+                    <p:column headerText="Quantidade">
+                        <h:outputText value="#{cestoAcai.quantidade}" />
+                    </p:column>
+                    
+                    <p:column headerText="Tipo">
+                        <h:outputText value="#{cestoAcai.tipo}" />
+                    </p:column>
+
+                </p:dataTable>
+                <div align="center">
+                    <p:menuButton value="Opções">
+                        <p:menuitem value="Salvar" action="#{armazenamentoBean.salvar()}" update="growl" icon="ui-icon-disk"/>
+                        <p:menuitem value="Cancelar" action="#{armazenamentoBean.cancelar()}" update="growl" icon="ui-icon-arrowrefresh-1-w"/>
+                        <p:separator />
+                        <p:menuitem value="Voltar Página Inicial" url="../../index.xhtml" icon="ui-icon-extlink"/>
+                    </p:menuButton>
+                </div>
+
+            </div>
+        </h:form>
+    </ui:define>
+</ui:composition>

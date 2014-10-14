@@ -5,10 +5,9 @@
  */
 package br.com.ufra.bean;
 
-import br.com.ufra.entidades.Processamento;
-import br.com.ufra.rn.ProcessamentoRN;
+import br.com.ufra.entidades.CestoDistribuidor;
+import br.com.ufra.rn.CestoDistribuidorRN;
 import java.io.Serializable;
-import java.util.ArrayList;
 import java.util.List;
 import javax.faces.application.FacesMessage;
 import javax.faces.bean.ManagedBean;
@@ -21,27 +20,31 @@ import javax.faces.context.FacesContext;
  */
 @ManagedBean
 @RequestScoped
-public class ProcessamentoBeans implements Serializable {
+public class CestoDistribuidorBean implements Serializable {
 
-    private Processamento processamento = new Processamento();
-    private ProcessamentoRN rn = new ProcessamentoRN();
-    private List<Processamento> processamentos = new ArrayList<Processamento>();
+    private CestoDistribuidor cesto = new CestoDistribuidor();
+    private CestoDistribuidorRN rn = new CestoDistribuidorRN();
+    private List<CestoDistribuidor> cestos;
 
-    public Processamento getCompra() {
-        return processamento;
+    public CestoDistribuidor getCesto() {
+        return cesto;
     }
 
-    public void setCompra(Processamento compra) {
-        this.processamento = compra;
+    public void setCesto(CestoDistribuidor cesto) {
+        this.cesto = cesto;
     }
 
-    public List<Processamento> getCategorias() {
-        processamentos = rn.obterTodos();
-        return processamentos;
+    public List<CestoDistribuidor> getCestos() {
+        cestos = rn.obterTodos();
+        return cestos;
+    }
+
+    public void setCestos(List<CestoDistribuidor> cestos) {
+        this.cestos = cestos;
     }
 
     public String salvar() {
-        if (rn.salvar(processamento)) {
+        if (rn.salvar(cesto)) {
             FacesMessage fm = new FacesMessage(FacesMessage.SEVERITY_INFO, "Sucesso", "Cadastro feito com Sucesso");
             FacesContext.getCurrentInstance().addMessage(null, fm);
             return "lista.xhtml";
@@ -54,7 +57,7 @@ public class ProcessamentoBeans implements Serializable {
     }
 
     public String excluir() {
-        if (rn.excluir(processamento)) {
+        if (rn.excluir(cesto)) {
             FacesMessage fm = new FacesMessage(FacesMessage.SEVERITY_INFO, "Sucesso", "Cadastro foi excluído com exito");
             FacesContext.getCurrentInstance().addMessage(null, fm);
             return "lista.xhtml";
@@ -76,5 +79,4 @@ public class ProcessamentoBeans implements Serializable {
     public String cancelar() {
         return "lista.xhtml";
     }
-
 }

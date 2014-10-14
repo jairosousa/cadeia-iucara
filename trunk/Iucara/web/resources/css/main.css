@@ -5,6 +5,10 @@
     color: black;
 }
 
+.ui-panelgrid {  
+    border: none !important; 
+    
+}  
 #indexHeader{
     font-family: verdana, sans-serif;
     color: black;
