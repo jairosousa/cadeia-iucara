@@ -3,7 +3,6 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-
 package br.com.ufra.entidades;
 
 import java.io.Serializable;
@@ -24,7 +23,7 @@ import javax.xml.bind.annotation.XmlTransient;
 
 /**
  *
- * @author Jairo Sousa
+ * @author bpmlab
  */
 @Entity
 @Table(name = "categoria")
@@ -44,7 +43,7 @@ public class Categoria implements Serializable {
     @Column(name = "nome")
     private String nome;
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "categoria")
-    private List<VinhoEmbalado> vinhoEmbaladoList;
+    private List<Processamento> processamentoList;
 
     public Categoria() {
     }
@@ -75,12 +74,12 @@ public class Categoria implements Serializable {
     }
 
     @XmlTransient
-    public List<VinhoEmbalado> getVinhoEmbaladoList() {
-        return vinhoEmbaladoList;
+    public List<Processamento> getProcessamentoList() {
+        return processamentoList;
     }
 
-    public void setVinhoEmbaladoList(List<VinhoEmbalado> vinhoEmbaladoList) {
-        this.vinhoEmbaladoList = vinhoEmbaladoList;
+    public void setProcessamentoList(List<Processamento> processamentoList) {
+        this.processamentoList = processamentoList;
     }
 
     @Override

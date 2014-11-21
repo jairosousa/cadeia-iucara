@@ -14,71 +14,70 @@ and open the template in the editor.
 
 
     <ui:define name="content">
-        <!--Desenvolver Formularios de compras-->
         <h:form id="form">
             <p:growl
                 id="growl"
                 showDetail="true"
                 sticky="false"/>
-            <p:fieldset legend="Realizar Compra" style="min-width:200px;max-width:200px;min-height:110px">
-                <h:inputHidden value="#{compraBean.compra.id}"/>
 
-                <p:panelGrid columns="2">
-                    <h:outputText value="Data"/>
-                    <p:inputMask value="#{compraBean.compra.data}" mask="99/99/9999">
-                    <f:convertDateTime pattern="dd/MM/yyyy"/>
-                    </p:inputMask>
 
-                    <h:outputText value="Quantidade"/>
-                    <p:inputText value="#{compraBean.compra.quantidade}"/>
+            <div align="center">
+                <p:panel header="Realizar Compra">
 
-                    <h:outputText value="Atravessador"/>
-                    <p:selectOneMenu value="#{compraBean.compra.atravessador}"
-                                     converter="atravessadorConverter">
-                        <f:selectItem itemLabel="Selecione" noSelectionOption="true"/>
-                        <f:selectItems value="#{atravessadorBean.atravessadores}"
-                                       var="atra"
-                                       itemLabel="#{atra.nome}"
-                                       itemValue="#{atra}"/>
-                    </p:selectOneMenu>
+                    <h:inputHidden value="#{comprasBean.compra.id}"/>
 
-                    <h:outputText value="Batedor"/>
-                    <p:selectOneMenu value="#{compraBean.compra.batedor}"
-                                     converter="batedorConverter">
-                        <f:selectItem itemLabel="Selecione" noSelectionOption="true"/>
-                        <f:selectItems value="#{batedorBean.batedores}"
-                                       var="bate"
-                                       itemLabel="#{bate.nome}"
-                                       itemValue="#{bate}"/>
-                    </p:selectOneMenu>
+                    <p:panelGrid columns="2">
 
-                    <h:outputText value="Cesto Açai"/>
-                    <p:selectOneMenu value="#{compraBean.compra.cestoAcai}"
-                                     converter="cestoAcaiConverter">
-                        <f:selectItem itemLabel="Selecione" noSelectionOption="true"/>
-                        <f:selectItems value="#{cestoAcaiBean.cestosAcai}"
-                                       var="cesto"
-                                       itemLabel="#{cesto.origem}"
-                                       itemValue="#{cesto}"/>
-                    </p:selectOneMenu>
+                        <h:outputLabel for="mask" value="Data "/>
+                        <p:calendar value="#{comprasBean.compra.data}"
+                                    id="mask" pattern="dd/MM/yyyy" mask="true" showOn="button">
+                        </p:calendar>
 
-                </p:panelGrid>
+                        <h:outputText value="Quantidade"/>
+                        <p:inputText value="#{comprasBean.compra.quantidade}"/>
 
-                <div align="center">
-                    <p:commandButton
-                        ajax="false"
-                        value="Salvar"
-                        icon="ui-icon-disk"
-                        action="#{compraBean.salvar()}"/>
-                    <p:commandButton
-                        ajax="false"
-                        value="Cancelar"
-                        icon="ui-icon-cancel"
-                        action="#{compraBean.cancelar()}"/>
-                </div>
-                
-                
-            </p:fieldset>
+                        <h:outputText value="Distribuidor"/>
+                        <p:selectOneMenu value="#{comprasBean.compra.distribuidor}"
+                                         converter="distribuidorConverter">
+                            <f:selectItem itemLabel="Selecione" noSelectionOption="true"/>
+                            <f:selectItems value="#{disbribuidorBean.distribuidores}"
+                                           var="dist"
+                                           itemLabel="#{dist.nome}"
+                                           itemValue="#{dist}"/>
+                        </p:selectOneMenu>
+
+                        <h:outputText value="Batedor"/>
+                        <p:selectOneMenu value="#{comprasBean.compra.batedor}"
+                                         converter="batedorConverter">
+                            <f:selectItem itemLabel="Selecione" noSelectionOption="true"/>
+                            <f:selectItems value="#{batedorBean.batedores}"
+                                           var="bate"
+                                           itemLabel="#{bate.nome}"
+                                           itemValue="#{bate}"/>
+                        </p:selectOneMenu>
+
+                        <h:outputText value="Cesto Venda"/>
+                        <p:selectOneMenu value="#{comprasBean.compra.cestoDistribuidor}"
+                                         converter="cestoDistConverter">
+                            <f:selectItem itemLabel="Selecione" noSelectionOption="true"/>
+                            <f:selectItems value="#{cestoDistribuidorBean.cestos}"
+                                           var="cesto"
+                                           itemLabel="#{cesto.capacidade}"
+                                           itemValue="#{cesto}"/>
+                        </p:selectOneMenu>
+
+                    </p:panelGrid>
+
+                    <div align="center">
+                        <p:menuButton value="Opções">
+                            <p:menuitem value="Salvar" action="#{comprasBean.salvar()}" update="growl" icon="ui-icon-disk"/>
+                            <p:menuitem value="Cancelar" action="#{comprasBean.cancelar()}" update="growl" icon="ui-icon-arrowrefresh-1-w"/>
+                            <p:separator />
+                            <p:menuitem value="Voltar Página Inicial" url="../../index.xhtml" icon="ui-icon-extlink"/>
+                        </p:menuButton>
+                    </div>
+                </p:panel>
+            </div>
         </h:form>
     </ui:define>
 </ui:composition>

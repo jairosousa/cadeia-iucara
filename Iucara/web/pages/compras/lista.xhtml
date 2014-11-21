@@ -20,55 +20,64 @@ and open the template in the editor.
                      showDetail="true"
                      sticky="false"/>
 
-            <p:fieldset legend="Compras">
-                
+            <div align="center">
+                <h:panelGrid width="1400" >
+                    <p:panel id="panel" header="Compras">
+                        <p:dataTable var="compras" value="#{comprasBean.compras}" 
+                                     rows="5" paginator="true" id="bars"
+                                     paginatorTemplate="{CurrentPageReport}  {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}"
+                                     rowsPerPageTemplate="6,12,16">
+                            <p:column headerText="Código">
+                                <div align="center"><h:outputText value="#{compras.id}"/></div>
+                            </p:column>
 
-                    <p:column headerText="Data">
-                        <h:outputText value="#{compras.data}">
-                            <f:convertDateTime pattern="dd/MM/yyyy"/>
-                        </h:outputText>
-                    </p:column>
+                            <p:column headerText="Distribuidor">
+                                <h:outputText value="#{compras.distribuidor.nome}"/>
+                            </p:column>
 
-                    <p:column headerText="Quantidade">
-                        <h:outputText value="#{compras.quantidade}"/>
-                    </p:column>
+                            <p:column headerText="Batedor">
+                                <h:outputText value="#{compras.batedor.nome}"/>
+                            </p:column>
 
-                    <p:column headerText="Atravessador">
-                        <h:outputText value="#{compras.atravessador.nome}"/>
-                    </p:column>
+                            <p:column headerText="Data">
+                                <h:outputText value="#{compras.data}">
+                                    <f:convertDateTime pattern="dd/MM/yyyy"/>
+                                </h:outputText>
+                            </p:column>
 
-                    <p:column headerText="Batedor">
-                        <h:outputText value="#{compras.batedor.nome}"/>
-                    </p:column>
+                            <p:column headerText="Quantidade">
+                                <h:outputText value="#{compras.quantidade}"/>
+                            </p:column>
 
-                    <p:column headerText="Cesto Açai">
-                        <h:outputText value="#{compras.cestoAcai.quantidade}"/>
-                    </p:column>
+                            <p:column headerText="Cesto">
+                                <h:outputText value="#{compras.cestoDistribuidor.id}"/>
+                            </p:column>
 
-                    <p:column headerText="Operações">
-                        <div align="center">
-                            <p:commandButton
-                                ajax="false"
-                                icon="ui-icon-pencil"
-                                action="#{compraBean.editar()}">
-                                <f:setPropertyActionListener
-                                    target="#{compraBean.compra}"
-                                    value="#{compras}"/>
-                            </p:commandButton>
+                            <p:column headerText="Operações">
+                                <div align="center">
+                                    <p:commandButton
+                                        ajax="false"
+                                        icon="ui-icon-pencil"
+                                        action="#{comprasBean.editar()}">
+                                        <f:setPropertyActionListener
+                                            target="#{comprasBean.armazenamento}"
+                                            value="#{compras}"/>
+                                    </p:commandButton>
 
-                            <p:commandButton
-                                ajax="false"
-                                icon="ui-icon-trash"
-                                action="#{compraBean.excluir()}">
-                                <f:setPropertyActionListener
-                                    target="#{compraBean.compra}"
-                                    value="#{compras}"/>
-                            </p:commandButton>
-                        </div>
-                    </p:column>
-                
-
-            </p:fieldset>
+                                    <p:commandButton
+                                        ajax="false"
+                                        icon="ui-icon-trash"
+                                        action="#{comprasBean.excluir()}">
+                                        <f:setPropertyActionListener
+                                            target="#{comprasBean.armazenamento}"
+                                            value="#{compras}"/>
+                                    </p:commandButton>
+                                </div>
+                            </p:column>
+                        </p:dataTable>
+                    </p:panel>
+                </h:panelGrid>
+            </div>
         </h:form>
     </ui:define>
 </ui:composition>

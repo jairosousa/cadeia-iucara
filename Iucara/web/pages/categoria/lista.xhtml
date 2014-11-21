@@ -14,42 +14,49 @@ and open the template in the editor.
 
 
     <ui:define name="content">
-            <h:form id="listagemCat">
+        <h:form id="listagemCat">
 
-                <p:growl id="grow"
-                         showDetail="true"
-                         sticky="false"/>
-                <p:fieldset legend="Categoria">
-                    <p:dataTable
-                        value="#{categoriaBean.categorias}"
-                        var="categoria">
-                        <p:column headerText="Nome">
-                            <h:outputText value="#{categoria.nome}"/>
-                        </p:column>
+            <div align="center">
+                <h:panelGrid width="700" >
+                    <p:panel id="panel" header="Categorias">
 
-                        <p:column headerText="Operações">
-                            <div align="center">
-                                <p:commandButton
-                                    ajax="false"
-                                    icon="ui-icon-pencil"
-                                    action="#{categoriaBean.editar()}">
-                                    <f:setPropertyActionListener
-                                        target="#{categoriaBean.categoria}"
-                                        value="#{categoria}"/>
-                                </p:commandButton>
-                                <p:commandButton
-                                    ajax="false"
-                                    icon="ui-icon-trash"
-                                    action="#{categoriaBean.excluir()}">
-                                    
-                                    <f:setPropertyActionListener
-                                        target="#{categoriaBean.categoria}"
-                                        value="#{categoria}"/>
-                                </p:commandButton>
-                            </div>
-                        </p:column>
-                    </p:dataTable>
-                </p:fieldset>
-            </h:form>
+                        <p:growl id="grow"
+                                 showDetail="true"
+                                 sticky="false"/>
+
+
+                        <p:dataTable
+                            value="#{categoriaBean.categorias}"
+                            var="categoria">
+                            <p:column headerText="Nome">
+                                <h:outputText value="#{categoria.nome}"/>
+                            </p:column>
+
+                            <p:column headerText="Operações">
+                                <div align="center">
+                                    <p:commandButton
+                                        ajax="false"
+                                        icon="ui-icon-pencil"
+                                        action="#{categoriaBean.editar()}">
+                                        <f:setPropertyActionListener
+                                            target="#{categoriaBean.categoria}"
+                                            value="#{categoria}"/>
+                                    </p:commandButton>
+                                    <p:commandButton
+                                        ajax="false"
+                                        icon="ui-icon-trash"
+                                        action="#{categoriaBean.excluir()}">
+
+                                        <f:setPropertyActionListener
+                                            target="#{categoriaBean.categoria}"
+                                            value="#{categoria}"/>
+                                    </p:commandButton>
+                                </div>
+                            </p:column>
+                        </p:dataTable>
+                    </p:panel>
+                </h:panelGrid>
+            </div> 
+        </h:form>
     </ui:define>
 </ui:composition>

@@ -3,7 +3,6 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-
 package br.com.ufra.entidades;
 
 import java.io.Serializable;
@@ -15,9 +14,6 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.JoinColumn;
-import javax.persistence.JoinTable;
-import javax.persistence.ManyToMany;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
 import javax.persistence.OneToMany;
@@ -27,7 +23,7 @@ import javax.xml.bind.annotation.XmlTransient;
 
 /**
  *
- * @author Jairo Sousa
+ * @author bpmlab
  */
 @Entity
 @Table(name = "cesto_distribuidor")
@@ -50,10 +46,7 @@ public class CestoDistribuidor implements Serializable {
     @Basic(optional = false)
     @Column(name = "capacidade")
     private double capacidade;
-    @JoinTable(name = "itens_cesto_distribuidor_compras", joinColumns = {
-        @JoinColumn(name = "Cesto_distribuidor", referencedColumnName = "id")}, inverseJoinColumns = {
-        @JoinColumn(name = "compra", referencedColumnName = "id")})
-    @ManyToMany
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "cestoDistribuidor")
     private List<Compra> compraList;
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "cestodistribuidor")
     private List<Armazenamento> armazenamentoList;
