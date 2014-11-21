@@ -3,13 +3,11 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-
 package br.com.ufra.entidades;
 
 import java.io.Serializable;
 import java.util.Date;
 import javax.persistence.Basic;
-import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -19,7 +17,6 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
-import javax.persistence.OneToOne;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
@@ -27,7 +24,7 @@ import javax.xml.bind.annotation.XmlRootElement;
 
 /**
  *
- * @author Jairo Sousa
+ * @author bpmlab
  */
 @Entity
 @Table(name = "processamento")
@@ -51,14 +48,15 @@ public class Processamento implements Serializable {
     @Basic(optional = false)
     @Column(name = "quantidade")
     private double quantidade;
-    @OneToOne(cascade = CascadeType.ALL, mappedBy = "processamento1")
-    private VinhoEmbalado vinhoEmbalado;
     @JoinColumn(name = "batedor", referencedColumnName = "id")
     @ManyToOne(optional = false)
     private Batedor batedor;
     @JoinColumn(name = "Cesto_distribuidor", referencedColumnName = "id")
     @ManyToOne(optional = false)
     private CestoDistribuidor cestodistribuidor;
+    @JoinColumn(name = "categoria", referencedColumnName = "id")
+    @ManyToOne(optional = false)
+    private Categoria categoria;
 
     public Processamento() {
     }
@@ -97,14 +95,6 @@ public class Processamento implements Serializable {
         this.quantidade = quantidade;
     }
 
-    public VinhoEmbalado getVinhoEmbalado() {
-        return vinhoEmbalado;
-    }
-
-    public void setVinhoEmbalado(VinhoEmbalado vinhoEmbalado) {
-        this.vinhoEmbalado = vinhoEmbalado;
-    }
-
     public Batedor getBatedor() {
         return batedor;
     }
@@ -119,6 +109,14 @@ public class Processamento implements Serializable {
 
     public void setCestodistribuidor(CestoDistribuidor cestodistribuidor) {
         this.cestodistribuidor = cestodistribuidor;
+    }
+
+    public Categoria getCategoria() {
+        return categoria;
+    }
+
+    public void setCategoria(Categoria categoria) {
+        this.categoria = categoria;
     }
 
     @Override

@@ -5,10 +5,9 @@
  */
 package br.com.ufra.bean;
 
-import br.com.ufra.entidades.Processamento;
-import br.com.ufra.rn.ProcessamentoRN;
+import br.com.ufra.entidades.Compra;
+import br.com.ufra.rn.CompraRN;
 import java.io.Serializable;
-import java.util.ArrayList;
 import java.util.List;
 import javax.faces.application.FacesMessage;
 import javax.faces.bean.ManagedBean;
@@ -17,32 +16,31 @@ import javax.faces.context.FacesContext;
 
 /**
  *
- * @author Jairo Sousa
+ * @author JNS-DELL
  */
 @ManagedBean
 @RequestScoped
-public class ProcessamentoBeans implements Serializable {
+public class ComprasBean implements Serializable {
 
-    private Processamento processamento = new Processamento();
-    private ProcessamentoRN rn = new ProcessamentoRN();
-    private List<Processamento> processamentos = new ArrayList<Processamento>();
+    private Compra compra = new Compra();
+    private CompraRN rn = new CompraRN();
+    private List<Compra> compras;
 
-    public Processamento getProcessamento() {
-        return processamento;
+    public Compra getCompra() {
+        return compra;
     }
 
-    public void setProcessamento(Processamento processamento) {
-        this.processamento = processamento;
+    public void setCompra(Compra compra) {
+        this.compra = compra;
     }
 
-    public List<Processamento> getProcessamentos() {
-        processamentos = rn.obterTodos();
-        return processamentos;
+    public List<Compra> getCompras() {
+        compras = rn.obterTodos();
+        return compras;
     }
-
-
+    
     public String salvar() {
-        if (rn.salvar(processamento)) {
+        if (rn.salvar(compra)) {
             FacesMessage fm = new FacesMessage(FacesMessage.SEVERITY_INFO, "Sucesso", "Cadastro feito com Sucesso");
             FacesContext.getCurrentInstance().addMessage(null, fm);
             return "lista.xhtml";
@@ -53,9 +51,9 @@ public class ProcessamentoBeans implements Serializable {
 
         }
     }
-
+    
     public String excluir() {
-        if (rn.excluir(processamento)) {
+        if (rn.excluir(compra)) {
             FacesMessage fm = new FacesMessage(FacesMessage.SEVERITY_INFO, "Sucesso", "Cadastro foi excluído com exito");
             FacesContext.getCurrentInstance().addMessage(null, fm);
             return "lista.xhtml";
@@ -65,7 +63,7 @@ public class ProcessamentoBeans implements Serializable {
             return "lista.xhtml";
         }
     }
-
+    
     public String editar() {
         return "formulario.xhtml";
     }

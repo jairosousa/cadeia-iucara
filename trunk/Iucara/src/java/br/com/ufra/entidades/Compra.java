@@ -3,12 +3,10 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-
 package br.com.ufra.entidades;
 
 import java.io.Serializable;
 import java.util.Date;
-import java.util.List;
 import javax.persistence.Basic;
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -16,7 +14,6 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
-import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
@@ -24,11 +21,10 @@ import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 import javax.xml.bind.annotation.XmlRootElement;
-import javax.xml.bind.annotation.XmlTransient;
 
 /**
  *
- * @author Jairo Sousa
+ * @author bpmlab
  */
 @Entity
 @Table(name = "compra")
@@ -52,14 +48,15 @@ public class Compra implements Serializable {
     @Basic(optional = false)
     @Column(name = "quantidade")
     private double quantidade;
-    @ManyToMany(mappedBy = "compraList")
-    private List<CestoDistribuidor> cestoDistribuidorList;
-    @JoinColumn(name = "batedor", referencedColumnName = "id")
-    @ManyToOne(optional = false)
-    private Batedor batedor;
     @JoinColumn(name = "distribuidor", referencedColumnName = "id")
     @ManyToOne(optional = false)
     private Distribuidor distribuidor;
+    @JoinColumn(name = "batedor", referencedColumnName = "id")
+    @ManyToOne(optional = false)
+    private Batedor batedor;
+    @JoinColumn(name = "cesto_distribuidor", referencedColumnName = "id")
+    @ManyToOne(optional = false)
+    private CestoDistribuidor cestoDistribuidor;
 
     public Compra() {
     }
@@ -98,13 +95,12 @@ public class Compra implements Serializable {
         this.quantidade = quantidade;
     }
 
-    @XmlTransient
-    public List<CestoDistribuidor> getCestoDistribuidorList() {
-        return cestoDistribuidorList;
+    public Distribuidor getDistribuidor() {
+        return distribuidor;
     }
 
-    public void setCestoDistribuidorList(List<CestoDistribuidor> cestoDistribuidorList) {
-        this.cestoDistribuidorList = cestoDistribuidorList;
+    public void setDistribuidor(Distribuidor distribuidor) {
+        this.distribuidor = distribuidor;
     }
 
     public Batedor getBatedor() {
@@ -115,12 +111,12 @@ public class Compra implements Serializable {
         this.batedor = batedor;
     }
 
-    public Distribuidor getDistribuidor() {
-        return distribuidor;
+    public CestoDistribuidor getCestoDistribuidor() {
+        return cestoDistribuidor;
     }
 
-    public void setDistribuidor(Distribuidor distribuidor) {
-        this.distribuidor = distribuidor;
+    public void setCestoDistribuidor(CestoDistribuidor cestoDistribuidor) {
+        this.cestoDistribuidor = cestoDistribuidor;
     }
 
     @Override

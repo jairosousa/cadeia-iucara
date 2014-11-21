@@ -35,10 +35,6 @@ and open the template in the editor.
                                 <h:outputText value="#{armaz.distribuidor.nome}"/>
                             </p:column>
 
-                            <p:column headerText="Cod. Cesto Dist">
-                                <h:outputText value="#{armaz.cestodistribuidor.id}"/>
-                            </p:column>
-
                             <p:column headerText="Data">
                                 <h:outputText value="#{armaz.data}">
                                     <f:convertDateTime pattern="dd/MM/yyyy"/>
@@ -49,10 +45,6 @@ and open the template in the editor.
                                 <h:outputText value="#{armaz.quantidade}"/>
                             </p:column>
 
-                            <p:column headerText="Cestos Açai">
-                                <div align="center"><p:commandButton type="button" onclick="PF('dlg3').show();"
-                                                                     icon="ui-icon-zoomout"/></div>
-                            </p:column>
 
                             <p:column headerText="Operações">
                                 <div align="center">
@@ -80,35 +72,6 @@ and open the template in the editor.
                     </p:panel> 
                 </h:panelGrid>
             </div>
-
-            <p:dialog header="Effects" widgetVar="dlg3" showEffect="explode" hideEffect="bounce" height="100">
-                <p:dataTable id="checkboxDT" var="cestoAcai" value="#{armazenamentoBean.cestosAcai}" style="margin-bottom:0">
-
-                    <p:column headerText="Id">
-                        <h:outputText value="#{cestoAcai.id}" />
-                    </p:column>
-
-                    <p:column headerText="Data">
-                        <h:outputText value="#{cestoAcai.data}">
-                            <f:convertDateTime pattern="dd/MM/yyyy"/>
-                        </h:outputText>
-                    </p:column>
-
-                    <p:column headerText="Origem">
-                        <h:outputText value="#{cestoAcai.origem}" />
-                    </p:column>
-
-                    <p:column headerText="Quantidade">
-                        <h:outputText value="#{cestoAcai.quantidade}" />
-                    </p:column>
-
-                    <p:column headerText="Tipo">
-                        <h:outputText value="#{cestoAcai.tipo}" />
-                    </p:column>
-
-                </p:dataTable>
-            </p:dialog>
-
         </h:form>
     </ui:define>
 </ui:composition>

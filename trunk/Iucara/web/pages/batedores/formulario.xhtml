@@ -19,9 +19,9 @@ and open the template in the editor.
                 id="growl"
                 showDetail="true"
                 sticky="false"/>
-            
+
             <div align="center">
-                <p:panel>
+                <p:panel header="Batedores">
                     <h:inputHidden value="#{batedorBean.batedor.id}"/>
                     <h:panelGrid columns="2" style="margin-bottom:10px" cellpadding="5" columnClasses="label, value">
                         <h:outputText value="Nome"/>
@@ -46,11 +46,12 @@ and open the template in the editor.
                         <h:outputText value="Email"/>
                         <p:inputText value="#{batedorBean.batedor.email}"/>
 
-                        <h:outputText value="Loggin"/>
+                        <h:outputText value="Login"/>
                         <p:inputText value="#{batedorBean.batedor.loggin}"/>
 
                         <h:outputText value="Senha"/>
-                        <p:password value="#{batedorBean.batedor.senha}"/>
+                        <p:keyboard value="#{batedorBean.batedor.senha}"
+                                   password="true" keypadOnly="true" layout="alphabetic"/>
 
                     </h:panelGrid><br/>
 

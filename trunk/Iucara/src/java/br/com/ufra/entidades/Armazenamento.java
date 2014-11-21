@@ -3,7 +3,6 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-
 package br.com.ufra.entidades;
 
 import java.io.Serializable;
@@ -29,7 +28,7 @@ import javax.xml.bind.annotation.XmlTransient;
 
 /**
  *
- * @author Jairo Sousa
+ * @author bpmlab
  */
 @Entity
 @Table(name = "armazenamento")
@@ -50,20 +49,20 @@ public class Armazenamento implements Serializable {
     @Column(name = "data")
     @Temporal(TemporalType.DATE)
     private Date data;
-    @Basic(optional = false)
+    // @Max(value=?)  @Min(value=?)//if you know range of your decimal fields consider using these annotations to enforce field validation
     @Column(name = "quantidade")
-    private double quantidade;
+    private Double quantidade;
     @JoinTable(name = "itens_armazenamento", joinColumns = {
         @JoinColumn(name = "armazenamento", referencedColumnName = "id")}, inverseJoinColumns = {
         @JoinColumn(name = "cesto_acai", referencedColumnName = "id")})
     @ManyToMany
     private List<CestoAcai> cestoAcaiList;
-    @JoinColumn(name = "Cesto_distribuidor", referencedColumnName = "id")
-    @ManyToOne(optional = false)
-    private CestoDistribuidor cestodistribuidor;
     @JoinColumn(name = "distribuidor", referencedColumnName = "id")
     @ManyToOne(optional = false)
     private Distribuidor distribuidor;
+    @JoinColumn(name = "Cesto_distribuidor", referencedColumnName = "id")
+    @ManyToOne(optional = false)
+    private CestoDistribuidor cestodistribuidor;
 
     public Armazenamento() {
     }
@@ -72,10 +71,9 @@ public class Armazenamento implements Serializable {
         this.id = id;
     }
 
-    public Armazenamento(Integer id, Date data, double quantidade) {
+    public Armazenamento(Integer id, Date data) {
         this.id = id;
         this.data = data;
-        this.quantidade = quantidade;
     }
 
     public Integer getId() {
@@ -94,11 +92,11 @@ public class Armazenamento implements Serializable {
         this.data = data;
     }
 
-    public double getQuantidade() {
+    public Double getQuantidade() {
         return quantidade;
     }
 
-    public void setQuantidade(double quantidade) {
+    public void setQuantidade(Double quantidade) {
         this.quantidade = quantidade;
     }
 
@@ -111,20 +109,20 @@ public class Armazenamento implements Serializable {
         this.cestoAcaiList = cestoAcaiList;
     }
 
-    public CestoDistribuidor getCestodistribuidor() {
-        return cestodistribuidor;
-    }
-
-    public void setCestodistribuidor(CestoDistribuidor cestodistribuidor) {
-        this.cestodistribuidor = cestodistribuidor;
-    }
-
     public Distribuidor getDistribuidor() {
         return distribuidor;
     }
 
     public void setDistribuidor(Distribuidor distribuidor) {
         this.distribuidor = distribuidor;
+    }
+
+    public CestoDistribuidor getCestodistribuidor() {
+        return cestodistribuidor;
+    }
+
+    public void setCestodistribuidor(CestoDistribuidor cestodistribuidor) {
+        this.cestodistribuidor = cestodistribuidor;
     }
 
     @Override
