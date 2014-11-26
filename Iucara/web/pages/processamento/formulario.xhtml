@@ -38,16 +38,13 @@ and open the template in the editor.
                                          converter="batedorConverter">
                             <f:selectItem itemLabel="Selecione" noSelectionOption="true"/>
                             <f:selectItems value="#{batedorBean.batedores}"
-                                           var="process"
-                                           itemLabel="#{process.nome}"
-                                           itemValue="#{process}"/>
+                                           var="bate"
+                                           itemLabel="#{bate.nome}"
+                                           itemValue="#{bate}"/>
                         </p:selectOneMenu>
 
-                        <h:outputText value="Quantidade"/>
-                        <p:inputText value="#{processamentoBeans.processamento.quantidade}"/>
-
                         <h:outputText value="Cesto Venda"/>
-                        <p:selectOneMenu value="#{processamentoBeans.processamento.cestoDistribuidor}"
+                        <p:selectOneMenu value="#{processamentoBeans.processamento.cestodistribuidor}"
                                          converter="cestoDistConverter">
                             <f:selectItem itemLabel="Selecione" noSelectionOption="true"/>
                             <f:selectItems value="#{cestoDistribuidorBean.cestos}"
@@ -55,6 +52,9 @@ and open the template in the editor.
                                            itemLabel="#{cesto.capacidade}"
                                            itemValue="#{cesto}"/>
                         </p:selectOneMenu>
+
+                        <h:outputText value="Quantidade"/>
+                        <p:inputText value="#{processamentoBeans.processamento.quantidade}"/>
 
                         <h:outputText value="Categoria"/>
                         <p:selectOneMenu value="#{processamentoBeans.processamento.categoria}"
@@ -67,7 +67,7 @@ and open the template in the editor.
                         </p:selectOneMenu>
 
                     </p:panelGrid>
-                    
+
                     <div align="center">
                         <p:menuButton value="Opções">
                             <p:menuitem value="Salvar" action="#{processamentoBeans.salvar()}" update="growl" icon="ui-icon-disk"/>

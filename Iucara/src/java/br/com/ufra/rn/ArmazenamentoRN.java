@@ -9,6 +9,7 @@ package br.com.ufra.rn;
 import br.com.ufra.dao.ArmazenamentoDAOImpl;
 import br.com.ufra.entidades.Armazenamento;
 import br.com.ufra.entidades.CestoAcai;
+import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -26,6 +27,14 @@ public class ArmazenamentoRN {
         } else {
             return dao.obter(Armazenamento.class, id);
         }
+    }
+    
+    public double quantidadeTotal(List<CestoAcai> cestos) {
+        double soma = 0;
+        for (CestoAcai cesto : cestos) {
+            soma += cesto.getQuantidade();
+        }
+        return soma;
     }
     
     public List<Armazenamento> obterTodos() {
@@ -50,7 +59,7 @@ public class ArmazenamentoRN {
     }
     
     public boolean salvar(Armazenamento armazenamento) {
-        if (armazenamento.getQuantidade()==0) {
+        if (armazenamento.getCestodistribuidor().equals("")) {
             return false;
         } else {
             if (armazenamento.getId() == null) {

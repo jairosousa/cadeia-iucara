@@ -7,6 +7,16 @@ and open the template in the editor.
     Created on : 09/08/2014, 10:11:13
     Author     : Jairo Sousa
 */
+body {
+    background-color: #660033 !important;
+}
+
+.container {
+    background-color: #dddddd !important;
+    width: 1030px;
+    margin: 0 auto;
+    text-align: center;
+}
 
 .titulo{
     font-size: 1.4em;

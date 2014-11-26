@@ -21,7 +21,7 @@ and open the template in the editor.
                      sticky="false"/>
 
             <div align="center">
-                <h:panelGrid width="1400" >
+                <h:panelGrid width="800" >
                     <p:panel id="panel" header="Compras">
                         <p:dataTable var="compras" value="#{comprasBean.compras}" 
                                      rows="5" paginator="true" id="bars"
@@ -30,14 +30,14 @@ and open the template in the editor.
                             <p:column headerText="Código">
                                 <div align="center"><h:outputText value="#{compras.id}"/></div>
                             </p:column>
+                            <p:column headerText="Batedor">
+                                <h:outputText value="#{compras.batedor.nome}"/>
+                            </p:column>
 
                             <p:column headerText="Distribuidor">
                                 <h:outputText value="#{compras.distribuidor.nome}"/>
                             </p:column>
 
-                            <p:column headerText="Batedor">
-                                <h:outputText value="#{compras.batedor.nome}"/>
-                            </p:column>
 
                             <p:column headerText="Data">
                                 <h:outputText value="#{compras.data}">
@@ -49,10 +49,7 @@ and open the template in the editor.
                                 <h:outputText value="#{compras.quantidade}"/>
                             </p:column>
 
-                            <p:column headerText="Cesto">
-                                <h:outputText value="#{compras.cestoDistribuidor.id}"/>
-                            </p:column>
-
+                            
                             <p:column headerText="Operações">
                                 <div align="center">
                                     <p:commandButton
