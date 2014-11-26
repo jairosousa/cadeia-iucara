@@ -22,7 +22,7 @@ and open the template in the editor.
                      sticky="false"/>
 
             <div align="center">
-                <h:panelGrid width="1000" >
+                <h:panelGrid width="800" >
                     <p:panel id="panel" header="Processamentos">
                         <p:dataTable var="process" value="#{processamentoBeans.processamentos}" 
                                      rows="5" paginator="true" id="bars"
@@ -48,7 +48,7 @@ and open the template in the editor.
                             </p:column>
 
                             <p:column headerText="Cesto">
-                                <h:outputText value="#{process.cestoDistribuidor.capacidade}"/>
+                                <h:outputText value="#{process.cestodistribuidor.capacidade}"/>
                             </p:column>
 
                             <p:column headerText="Categoria">

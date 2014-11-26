@@ -20,12 +20,15 @@ and open the template in the editor.
                      sticky="false"/>
 
             <div align="center">
-                <h:panelGrid width="1000" >
+                <h:panelGrid width="800" >
                     <p:panel id="panel" header="Armazenamentos">
                         <p:dataTable var="armaz" value="#{armazenamentoBean.armazenamentos}" 
                                      rows="5" paginator="true" id="bars"
                                      paginatorTemplate="{CurrentPageReport}  {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}"
                                      rowsPerPageTemplate="6,12,16">
+                            <p:column headerText="+">
+                                <p:rowToggler/>
+                            </p:column>
 
                             <p:column headerText="Código">
                                 <div align="center"><h:outputText value="#{armaz.id}"/></div>
@@ -39,10 +42,6 @@ and open the template in the editor.
                                 <h:outputText value="#{armaz.data}">
                                     <f:convertDateTime pattern="dd/MM/yyyy"/>
                                 </h:outputText>
-                            </p:column>
-
-                            <p:column headerText="Quantidade">
-                                <h:outputText value="#{armaz.quantidade}"/>
                             </p:column>
 
 
@@ -68,6 +67,32 @@ and open the template in the editor.
                                 </div>
                             </p:column>
 
+                            <p:rowExpansion>
+                                <p:dataTable id="dt_cestos"
+                                             value="#{armaz.cestoAcaiList}"
+                                             var="c">
+                                    <p:column headerText="Origem">
+                                        <h:outputText value="#{c.origem}"/>
+                                    </p:column>
+
+                                    <p:column headerText="Quantidade">
+                                        <h:outputText value="#{c.quantidade}"/>
+                                        <f:facet name="footer">
+                                            <h:outputText value="#{armazenamentoBean.getQuant(armaz.cestoAcaiList)}"/>
+                                        </f:facet>
+                                    </p:column>
+
+                                    <p:column headerText="Data">
+                                        <h:outputText value="#{c.data}">
+                                            <f:convertDateTime pattern="dd/MM/yyyy"/>
+                                        </h:outputText>
+                                    </p:column>
+
+                                    <p:column headerText="Tipo">
+                                        <h:outputText value="#{c.tipo}"/>
+                                    </p:column>
+                                </p:dataTable> 
+                            </p:rowExpansion>
                         </p:dataTable>
                     </p:panel> 
                 </h:panelGrid>

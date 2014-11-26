@@ -6,6 +6,7 @@
 package br.com.ufra.entidades;
 
 import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 import javax.persistence.Basic;
@@ -102,6 +103,9 @@ public class Armazenamento implements Serializable {
 
     @XmlTransient
     public List<CestoAcai> getCestoAcaiList() {
+        if (cestoAcaiList == null) {
+            cestoAcaiList = new ArrayList<>();
+        }
         return cestoAcaiList;
     }
 

@@ -14,6 +14,7 @@ import java.util.List;
 import javax.faces.application.FacesMessage;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.RequestScoped;
+import javax.faces.bean.ViewScoped;
 import javax.faces.context.FacesContext;
 
 /**
@@ -21,14 +22,20 @@ import javax.faces.context.FacesContext;
  * @author Jairo Sousa
  */
 @ManagedBean
-@RequestScoped
+@ViewScoped
 public class ArmazenamentoBean implements Serializable {
 
     private Armazenamento armazenamento = new Armazenamento();
     private ArmazenamentoRN rn = new ArmazenamentoRN();
-    private List<Armazenamento> armazenamentos = new ArrayList<Armazenamento>();
-    private List<CestoAcai> cestosAcai = new ArrayList<CestoAcai>();
+    private CestoAcai cestoAcai;
+    private List<Armazenamento> armazenamentos = new ArrayList<>();
+    private double quant;
 
+    public double getQuant(List<CestoAcai> cestos) {
+        quant = rn.quantidadeTotal(cestos);
+        return quant;
+    }
+    
     public Armazenamento getArmazenamento() {
         return armazenamento;
     }
@@ -37,16 +44,28 @@ public class ArmazenamentoBean implements Serializable {
         this.armazenamento = armazenamento;
     }
 
+    public CestoAcai getCestoAcai() {
+        return cestoAcai;
+    }
+
+    public void setCestoAcai(CestoAcai cestoAcai) {
+        this.cestoAcai = cestoAcai;
+    }
+
     public List<Armazenamento> getArmazenamentos() {
         armazenamentos = rn.obterTodos();
         return armazenamentos;
     }
 
-    public List<CestoAcai> getCestosAcai() {
-        cestosAcai = rn.obterCestoAcaiArmazenamento();
-        return cestosAcai;
+    public void addCesto() {
+        List<CestoAcai> cestos = armazenamento.getCestoAcaiList();
+        if (cestos == null) {
+            cestos = new ArrayList<>();
+        }
+        cestoAcai.getArmazenamentoList().add(armazenamento);
+        cestos.add(cestoAcai);
     }
-
+    
     public String salvar() {
         if (rn.salvar(armazenamento)) {
             FacesMessage fm = new FacesMessage(FacesMessage.SEVERITY_INFO, "Sucesso", "Cadastro feito com Sucesso");
