@@ -1,0 +1,1 @@
+Esse projeto tratara da parte da comercialização do processo da cadeia do açaí.
